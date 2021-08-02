@@ -1,13 +1,15 @@
 // ==UserScript==
-// @name        EForm buttons
+// @name        Eform buttons
 // @namespace   GongOscar
-// @description Various navigation buttons for echart screen.  Set your own specific fid (form number) or Measurement groupName
+// @description Constant EForm Submit and Print button locations
 // @include     */eform/efmformadd_data.jsp?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @version 15.2
 // @grant       none
 // ==/UserScript==
 //window.moveTo(300, 100)
+
+/*
 function setCookie(cname, cvalue, exdays, cpath)
 {
   var d = new Date();
@@ -40,23 +42,24 @@ vPath = ('https://' + location.host + '/' + firstElement + '//')
 var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
 var res = myParam.indexOf('&')
 var demo_no = myParam.substring(0, res) //var myWindow = window.open("","","width=200,height=100");
+*/
 
 var input = document.createElement('input');
 input.type = 'button';
 input.value = 'Submit';
-input.onclick = showAlert;
-input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:0px;right:0px; ');
+input.onclick = showAlert
+input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:0px;left:0px; background-color:#66ff66;');
 document.body.appendChild(input);
 function showAlert()
 {
   $('#SubmitButton').click()
 } 
-// INSERT YOU OWN MEASUREMENT UNIQUE SELECTOR  HERE
+
 var input1 = document.createElement('input');
 input1.type = 'button';
-input1.value = 'Specialist';
+input1.value = 'Sub&Print';
 input1.onclick = showAlert1;
-input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;right:0px; ');
+input1.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:0px; background-color:#66ff66;');
 document.body.appendChild(input1);
 function showAlert1()
 {
