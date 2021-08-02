@@ -118,7 +118,7 @@ function showAlert6()
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   var formPath = vPath + '/eform/efmformadd_data.jsp?fid=299&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
-  window.open(formPath)
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 800,top = 0')
 }
 
 /*
@@ -148,7 +148,7 @@ function showAlert7() // INSERT YOU OWN MEASUREMENT groupName=?????  below
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   var formPath = vPath + '/eform/efmformadd_data.jsp?fid=654&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
-  window.open(formPath)
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 800,top = 0')
 }
 */
 
@@ -165,7 +165,7 @@ function showAlert8()
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   var formPath = vPath + '/eform/efmformadd_data.jsp?fid=74&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
-  window.open(formPath)
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 800,top = 0')
 }
 var input9 = document.createElement('input');
 input9.type = 'button';
