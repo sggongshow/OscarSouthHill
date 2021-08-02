@@ -5,7 +5,6 @@
 // @include     */eform/efmformadd_data.jsp?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @version 15.2
-// @grant       none
 // ==/UserScript==
 //window.moveTo(300, 100)
 
@@ -30,6 +29,9 @@ function getCookie(cname)
   return '';
 } //x = $('#enTemplate');
 //x.css('background-color', 'yellow');
+*/
+
+/* ///FOR TICKLER KEYBOARD SHORTCUT TO BE ENABLED
 
 var myWindow = ''
 var elements = (window.location.pathname.split('/', 2))
@@ -39,9 +41,34 @@ vPath = ('https://' + location.host + '/' + firstElement + '//')
 
 //alert(vPath)
 
-var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
+var myParam = location.search.split('demographic_no=') [1] 
 var res = myParam.indexOf('&')
-var demo_no = myParam.substring(0, res) //var myWindow = window.open("","","width=200,height=100");
+var demo_no = myParam
+if (res > 0){
+	var demo_no = myParam.substring(0, res)
+}
+//alert('res ' + res)
+//alert('Demo ' + demo_no)
+
+document.addEventListener('keydown', function(theEvent) {
+	var theKey = theEvent.key
+	var theAltKey =theEvent.altKey;
+	var theCtrlKey = theEvent.ctrlKey;
+	var theShiftKey= theEvent.shiftKey;
+
+	switch(true){
+		case theAltKey && theKey==='t': //Tickler 
+ 			var formPath = vPath + '/tickler/ticklerAdd.jsp?demographic_no=' + demo_no //var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
+  		//alert(formPath)
+  		window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
+			//https://doctors-office-surrey.kai-oscar.com/oscar/tickler/ticklerAdd.jsp?demographic_no=5
+			break;
+      
+    default:
+      break;
+
+	}
+}, true);
 */
 
 var input = document.createElement('input');
@@ -66,36 +93,3 @@ function showAlert1()
   $('#PrintSubmitButton').click()
 }
 
-/*var input2 = document.createElement('input');
-input2.type = 'button';
-input2.value = 'Referral';
-input2.onclick = showAlert2;
-input2.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:0px;right:140px; ');
-document.body.appendChild(input2);
-function showAlert2()
-{
-  $('#menuTitleconsultation > h3:nth-child(1) > a:nth-child(1)').click()
-}
-var input3 = document.createElement('input');
-input3.type = 'button';
-input3.value = 'Rx';
-input3.onclick = showAlert3;
-input3.setAttribute('style', 'width:60px;font-size:16px;z-index:1;position:fixed;bottom:120px;right:0px; background-color: #ffff00;');
-document.body.appendChild(input3);
-function showAlert3()
-{
-  $('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
-}
-var input4 = document.createElement('input');
-input4.type = 'button';
-input4.value = 'BP/HR/Wt';
-input4.onclick = showAlert4;
-input4.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:30px;right:60px; ');
-document.body.appendChild(input4);
-function showAlert4() // INSERT YOU OWN MEASUREMENT groupName=?????  below
-{
-  $('#menu3 > a:nth-child(2)').click()
-  //window.open(vPath + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Vitals', 'VitalsWindow', 'width=1000,height=500')
-}
-}\
-*/
