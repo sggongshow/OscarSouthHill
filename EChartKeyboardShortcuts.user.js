@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           EChart_KeyboardShortcuts
-// @namespace      GongOscar
+// @namespace      oscar/StansScripts
 // @version 15.2
 // @description Various Echart shortcut buttons (Alt+ e,v,z,x,k,s,0,1,2,3,4,5,7). Set your own Measurement groupName and default population text.
 // @include        */casemgmt/forward.jsp?action=view&demographic*
@@ -72,7 +72,7 @@ document.addEventListener('keydown', function(theEvent) {
   		var demo_no = myParam.substring(0, res) //alert (demo_no)
   		// INSERT YOU OWN form ID (fid=??) here
   		var formPath = vPath + '/eform/efmformadd_data.jsp?fid=370&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
-  		window.open(formPath)
+  		window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 			break;
       
       
@@ -83,7 +83,7 @@ document.addEventListener('keydown', function(theEvent) {
   		// INSERT YOU OWN form ID (fid=??) here
   		var formPath = vPath + '/eform/efmformadd_data.jsp?fid=321&demographic_no=' + demo_no //var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
   		//alert(formPath)
-  		window.open(formPath)
+  		window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 			break;
       
 
