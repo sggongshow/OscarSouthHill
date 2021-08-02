@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Echart buttons
+// @name        EForm buttons
 // @namespace   GongOscar
 // @description Various navigation buttons for echart screen.  Set your own specific fid (form number) or Measurement groupName
 // @include     */eform/efmformadd_data.jsp?*
