@@ -2,30 +2,98 @@
 // @name        Document Review buttons
 // @namespace   GongOscar
 // @description Constant EForm Submit and Print button locations
+// @include     */dms/showDocument.jsp?*
 // @include     */dms/MultiPageDocDisplay.jsp?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @version 15.2
 // ==/UserScript==
 //window.moveTo(300, 100)
 
+ ///FOR TICKLER KEYBOARD SHORTCUT TO BE ENABLED
+
+document.addEventListener('keydown', function(theEvent) {
+	var theKey = theEvent.key
+	var theAltKey =theEvent.altKey;
+	var theCtrlKey = theEvent.ctrlKey;
+	var theShiftKey= theEvent.shiftKey;
+
+	switch(true){
+      //Acknowledge 
+    case theAltKey && theKey==='1': 
+ 			var button = $('input[type="submit"][value="Acknowledge"]') //[value="Acknowledge"]')
+  		var parentId = $(button).closest('form').attr('id');
+  		if (parentId.includes('acknowledge')){
+  			button.click()
+  		}
+			break;
+      
+      //Tickler 
+		case theAltKey && theKey==='2': 
+ 			var button = $('input[type="button"][value="Tickler"]') 
+  		var parentId = $(button).closest('form').attr('id')
+  		if (parentId.includes('acknowledge')){
+  			button.click()
+  		}
+			break;
+      
+      //Echart
+    case theAltKey && theKey==='3': 
+ 			var button = $('input[type="button"][value="eChart"]') 
+  		var parentId = $(button).closest('form').attr('id')
+  		if (parentId.includes('acknowledge')){
+  			button.click()
+  		}
+			break;
+      
+    default:
+    	break;
+
+	}
+}, true);
+
+
 var input = document.createElement('input');
 input.type = 'button';
-input.value = 'Acknowledge';
+input.value = 'Acknow';
 input.onclick = showAlert
-input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:0px;left:0px; background-color:#66ff66;');
+input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:0px; background-color:#66ff66;');
 document.body.appendChild(input);
 function showAlert()
 {
-  $('td[input type="submit"]').click()
+  var button = $('input[type="submit"][value="Acknowledge"]') //[value="Acknowledge"]')
+  var parentId = $(button).closest('form').attr('id');
+  if (parentId.includes('acknowledge')){
+  	button.click()
+  }
 } 
 
 var input1 = document.createElement('input');
-input1.type = 'Tickler';
-input1.value = 'Sub&Print';
+input1.type = 'button';
+input1.value = 'Tickler';
 input1.onclick = showAlert1;
-input1.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:0px; background-color:#66ff66;');
+input1.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:80; background-color:#FF6600;');
 document.body.appendChild(input1);
 function showAlert1()
 {
-  //$('#PrintSubmitButton').click()
+  var button = $('input[type="button"][value="Tickler"]') 
+  var parentId = $(button).closest('form').attr('id')
+  if (parentId.includes('acknowledge')){
+  	button.click()
+  }
 }
+
+var input2 = document.createElement('input');
+input2.type = 'button';
+input2.value = 'Echart';
+input2.onclick = showAlert1;
+input2.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:160;');
+document.body.appendChild(input2);
+function showAlert2()
+{
+  var button = $('input[type="button"][value="eChart"]') 
+  var parentId = $(button).closest('form').attr('id')
+  if (parentId.includes('acknowledge')){
+  	button.click()
+  }
+}
+
