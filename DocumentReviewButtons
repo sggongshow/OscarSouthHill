@@ -85,16 +85,16 @@ function showAlert1()
 var input2 = document.createElement('input');
 input2.type = 'button';
 input2.value = 'Echart';
-input2.onclick = showAlert1;
+input2.onclick = showAlert2;
 input2.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:160;');
 document.body.appendChild(input2);
 function showAlert2()
 {
-  var button = $('input[type="button"][value="eChart"]') 
+  var button = $('input[type="button"][value*="Chart"]') 
   var parentId = $(button).closest('form').attr('id')
   if (parentId.includes('acknowledge')){
   	button.click()
   }
+ 
 }
-
 
