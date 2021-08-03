@@ -1,0 +1,31 @@
+// ==UserScript==
+// @name        Document Review buttons
+// @namespace   GongOscar
+// @description Constant EForm Submit and Print button locations
+// @include     */dms/MultiPageDocDisplay.jsp?*
+// @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
+// @version 15.2
+// ==/UserScript==
+//window.moveTo(300, 100)
+
+var input = document.createElement('input');
+input.type = 'button';
+input.value = 'Acknowledge';
+input.onclick = showAlert
+input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:0px;left:0px; background-color:#66ff66;');
+document.body.appendChild(input);
+function showAlert()
+{
+  $('td[input type="submit"]').click()
+} 
+
+var input1 = document.createElement('input');
+input1.type = 'Tickler';
+input1.value = 'Sub&Print';
+input1.onclick = showAlert1;
+input1.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:30px;left:0px; background-color:#66ff66;');
+document.body.appendChild(input1);
+function showAlert1()
+{
+  //$('#PrintSubmitButton').click()
+}
