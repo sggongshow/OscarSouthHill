@@ -45,19 +45,25 @@ document.addEventListener('keydown', function(theEvent) {
 	//var theDownKey= theEvent.PgDnKey;
 
 	switch(true){
-		case theAltKey && theKey==='d': //Disease List
- 			$('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
-      //alert(`TestAlt+e and ${theKey}`);
+      
+     case theAltKey && theKey==='q': //Show med list
+ 			$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+			break;
+      
+		case theAltKey && theKey==='w': //Repeat Meds (Meds+)
+ 			$('#Dx > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
       
     case theAltKey && theKey==='s': //save, sign and bill
  			$('#save > span > input:nth-child(6)').click()
 			break;
       
-		case theAltKey && theKey==='q': //Show meds
- 			$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+		
+    case theAltKey && theKey==='t': //new Tickler
+ 			$('#tickler > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
-      
+       
+     /*
     case theAltKey && theKey==='e': //Expand left side
  			$('#imgeforms5').click()
   		$('#imgmeasurements5').click()
@@ -85,9 +91,22 @@ document.addEventListener('keydown', function(theEvent) {
   		//alert(formPath)
   		window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 			break;
+      */
       
-
-    default:
+     	case theAltKey && theKey==='1': //Preventions
+      	$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      	break
+      
+     	case theAltKey && theKey==='2': // new Tickler
+				$('#tickler > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
+      	break
+      
+      case theAltKey && theKey==='3': //Diease
+				 $('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      	break
+     
+      
+  		default:
       break;
 
 	}
