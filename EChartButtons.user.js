@@ -118,7 +118,7 @@ function showAlert6()
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   var formPath = vPath + '/eform/efmformadd_data.jsp?fid=299&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
-  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 800,top = 0')
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 0,top = 0')
 }
 
 /*
@@ -165,7 +165,7 @@ function showAlert8()
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   var formPath = vPath + '/eform/efmformadd_data.jsp?fid=74&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
-  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 800,top = 0')
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 0,top = 0')
 }
 var input9 = document.createElement('input');
 input9.type = 'button';
@@ -207,6 +207,17 @@ document.body.appendChild(input52);
 function showAlert52()
 {
   $('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+}
+
+var input53 = document.createElement('input');
+input53.type = 'button';
+input53.value = '+Tickler';
+input53.onclick = showAlert53;
+input53.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:30px;left:0px;background-color: #ff6600;');
+document.body.appendChild(input53);
+function showAlert53()
+{
+  $('#tickler > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 }
 
 /*
@@ -251,7 +262,7 @@ function showAlert12() //{window.open(vPath  + '/oscarEncounter/oscarMeasurement
 {
   //https://secure10.oscarhost.ca/SDHurwitzInc/eform/efmformadd_data.jsp?fid=68&demographic_no=640&appointment=
   var formPath = vPath + '/lab/CumulativeLabValues3.jsp?demographic_no=' + demo_no
-  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 800,top = 0')
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left =0,top = 0')
 }
 var input13 = document.createElement('input');
 input13.type = 'button';
@@ -301,7 +312,7 @@ function showAlert15()
 }
 var input16 = document.createElement('input');
 input16.type = 'button';
-input16.value = 'Rourke';
+input16.value = 'BROKEN';
 input16.onclick = showAlert16;
 input16.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:90px;right:60px');
 document.body.appendChild(input16);
