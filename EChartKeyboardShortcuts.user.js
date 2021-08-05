@@ -51,7 +51,7 @@ document.addEventListener('keydown', function(theEvent) {
 			break;
       
 		case theAltKey && theKey==='w': //Repeat Meds (Meds+)
- 			$('#Dx > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
+ 			$('#Rx > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
       
     case theAltKey && theKey==='s': //save, sign and bill
@@ -63,7 +63,7 @@ document.addEventListener('keydown', function(theEvent) {
  			$('#tickler > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
        
-     /*
+     
     case theAltKey && theKey==='e': //Expand left side
  			$('#imgeforms5').click()
   		$('#imgmeasurements5').click()
@@ -71,7 +71,7 @@ document.addEventListener('keydown', function(theEvent) {
   		$('#imglabs5').click()
   		$('#imgpreventions5').click()
 			break;
-      
+      /*
     case theAltKey && theKey==='1': //Imaging
  			var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
   		var res = myParam.indexOf('&')
@@ -104,7 +104,10 @@ document.addEventListener('keydown', function(theEvent) {
       case theAltKey && theKey==='3': //Diease
 				 $('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
       	break
-     
+      
+       case theAltKey && theKey==='4': //Documents
+				 $('#docs > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      	break
       
   		default:
       break;
