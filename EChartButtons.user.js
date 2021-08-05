@@ -220,6 +220,17 @@ function showAlert53()
   $('#tickler > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 }
 
+var input54 = document.createElement('input');
+input54.type = 'button';
+input54.value = 'Docs';
+input54.onclick = showAlert54;
+input54.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:30px;left:80px;background-color: #476BB3;');
+document.body.appendChild(input54);
+function showAlert54()
+{
+  $('#docs > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+}
+
 /*
 var input10 = document.createElement('input');
 input10.type = 'button';
