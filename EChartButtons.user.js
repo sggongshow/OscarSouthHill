@@ -169,17 +169,18 @@ function showAlert8()
 }
 var input9 = document.createElement('input');
 input9.type = 'button';
-input9.value = 'blank3';
+input9.value = 'BMD';
 input9.onclick = showAlert9;
-input9.setAttribute('style', 'width:60px;font-size:16px;z-index:1;position:fixed;bottom:90px;right:0px; ');
+input9.setAttribute('style', 'width:60px;font-size:16px;z-index:1;position:fixed;bottom:90px;right:0px; background-color: #FFFFFF;');
 document.body.appendChild(input9);
 function showAlert9()
 {
-  $('#imgeforms5').click()
-  $('#imgmeasurements5').click()
-  $('#imgdocs5').click()
-  $('#imglabs5').click()
-  $('#imgpreventions5').click()
+  var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
+  var res = myParam.indexOf('&')
+  var demo_no = myParam.substring(0, res) //alert (demo_no)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=288&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
+  //alert(formPath)
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left = 0,top = 0')
 }
 
 //expand left
@@ -302,7 +303,7 @@ function showAlert14()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=321&demographic_no=' + demo_no //var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=369&demographic_no=' + demo_no //var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
   //alert(formPath)
   window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
@@ -321,11 +322,12 @@ function showAlert15()
   var formPath = vPath + '/eform/efmformadd_data.jsp?fid=370&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
   window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
+
 var input16 = document.createElement('input');
 input16.type = 'button';
-input16.value = 'BROKEN';
+input16.value = 'PFT';
 input16.onclick = showAlert16;
-input16.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:90px;right:60px');
+input16.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:90px;right:60px; background-color: #ff99cc;');
 document.body.appendChild(input16);
 function showAlert16()
 {
@@ -333,9 +335,26 @@ function showAlert16()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/form/forwardshortcutname.jsp?formname=Rourke2009&formId=510&demographic_no=' + demo_no //window.open(formPath)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=300&demographic_no=' + demo_no + '&parentAjaxId=eforms' //window.open(formPath)
   window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
+
+
+var input55 = document.createElement('input');
+input55.type = 'button';
+input55.value = 'Stress';
+input55.onclick = showAlert55;
+input55.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;bottom:60px;right:60px; background-color: #ff99cc;');
+document.body.appendChild(input55);
+function showAlert55()
+{
+  //var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
+  //var res = myParam.indexOf('&')
+  //var demo_no = myParam.substring(0, res) //alert (demo_no)
+  //var formPath = vPath + '/eform/efmformadd_data.jsp?fid=340&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
+  //window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
+}
+
 
 var input50 = document.createElement('input');
 input50.type = 'button';
@@ -364,6 +383,8 @@ function showAlert17()
 {
   $('#menu1 > a:nth-child(6)').click()
 }
+
+
 var input18 = document.createElement('input');
 input18.type = 'button';
 input18.value = 'Trip
