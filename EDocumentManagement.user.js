@@ -63,4 +63,3 @@ function showAlert2()
 {
   window.location = (newURL + "");
 }
-
