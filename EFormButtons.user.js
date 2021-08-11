@@ -79,7 +79,8 @@ input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;
 document.body.appendChild(input);
 function showAlert()
 {
-  $('#SubmitButton').click()
+	var subButton = $('input[type="submit"][value="Submit"]')
+  subButton.click()
 } 
 
 var input1 = document.createElement('input');
@@ -91,4 +92,6 @@ document.body.appendChild(input1);
 function showAlert1()
 {
   $('#PrintSubmitButton').click()
+  
 }
+
