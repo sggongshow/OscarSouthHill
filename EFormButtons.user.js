@@ -80,6 +80,18 @@ document.body.appendChild(input);
 function showAlert()
 {
 	var subButton = $('input[type="submit"][value="Submit"]')
+  //console.log(subButton)
+  if (subButton.length <1){
+    subButton = $('input[type="button"][value="Submit"]')
+    //console.log("note1")
+    //console.log(subButton)
+  }else if(subButton.length <1){
+		subButton = $('#SubmitButton')
+    //console.log("note2")
+    //console.log(subButton)
+  }
+     
+  //console.log(subButton)
   subButton.click()
 } 
 
