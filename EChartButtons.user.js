@@ -348,11 +348,11 @@ input55.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixe
 document.body.appendChild(input55);
 function showAlert55()
 {
-  //var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
-  //var res = myParam.indexOf('&')
-  //var demo_no = myParam.substring(0, res) //alert (demo_no)
-  //var formPath = vPath + '/eform/efmformadd_data.jsp?fid=340&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
-  //window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
+  var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
+  var res = myParam.indexOf('&')
+  var demo_no = myParam.substring(0, res) //alert (demo_no)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=340&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
+  window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
 
 
