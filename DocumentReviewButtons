@@ -114,10 +114,11 @@ var inputTextbox = document.createElement('input');
 inputTextbox.type = 'text';
 inputTextbox.id = 'newTextBoxInput'
 inputTextbox.name = 'newTextBoxInput'
-inputTextbox.value = ""
+//inputTextbox.value = ""
+
 
 if (window.location.pathname.includes("labDisplay.jsp")){
-	inputTextbox.setAttribute('style', 'width:140px;font-size:12px;padding:0px;position:fixed;top:58px;left:538px;');
+	inputTextbox.setAttribute('style', 'width:140px;font-size:12px;padding:0px;position:fixed;top:58px;left:518px; border-color:red;');
 	document.body.appendChild(inputTextbox);
 }
 
@@ -138,19 +139,12 @@ document.body.appendChild(input);
 function showAlert()
 {
   //Covering the dumb various codings of the acknowledge button
-  var button = ""
-  if (window.location.pathname.includes("labDisplay.jsp")){
-  var button = $('input[type="button"][value="Acknowledge"]')
-  }else{
-  var button = $('input[type="submit"][value="Acknowledge"]')
-  }
   
-  var parentId = $(button).closest('form').attr('id');
-  if (parentId.includes('acknowledge')){
+	
     
-    //weird lab/transcriptions page
-    if (window.location.pathname.includes("labDisplay.jsp")){ 
-     
+  //weird lab/transcriptions page
+  if (window.location.pathname.includes("labDisplay.jsp")){ 
+
     //Acknowledge will also auto click label if there is text in label. 
     //If nothing in text box then won't click Label button
     var labelButton = $('[type="button"][value="Label"][id*="Label"]') 
@@ -161,18 +155,34 @@ function showAlert()
     //Check secondary textbox for value, input to original text box
     var newTextBoxVal = document.getElementById('newTextBoxInput').value
     labelElement.value = newTextBoxVal
-		var labelEntryText = labelEntry.val()
-    
-    	if (labelEntryText.length >0){ //check if anything in text box. 
-    		labelButton.click()
-    	}
-      
-    }else{//Edoc page
-      var saveButton = $('input[type="submit"][name="save"][id*="save"]')
-      saveButton.click()
+    var labelEntryText = labelEntry.val()
+
+    if (labelEntryText.length >0){ //check if anything in text box. 
+      labelButton.click()
     }
-    
-  	button[0].click()
+
+  }else{//Edoc page
+    var saveButton = $('input[type="submit"][name="save"][id*="save"]')
+    saveButton.click()
+  }
+  
+  //click acknowledge button or close if no acknowledge button  	
+  var button
+  if (window.location.pathname.includes("labDisplay.jsp")){
+  var button = $('input[type="button"][value="Acknowledge"]')[0]
+  }else{
+  var button = $('input[type="submit"][value="Acknowledge"]')[0]
+  }
+  
+  // if no ack, close button instead
+  if (button == null){
+    button = $('input[type="button"][value*="Close"]')
+  }
+     
+  console.log(button)
+  var parentId = $(button).closest('form').attr('id');
+  if (parentId.includes('acknowledge')){
+  	button.click()
   }
 } 
 
