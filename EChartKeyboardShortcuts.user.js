@@ -101,12 +101,12 @@ document.addEventListener('keydown', function(theEvent) {
 				$('#tickler > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
       	break
       
-      case theAltKey && theKey==='3': //Diease
-				 $('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      case theAltKey && theKey==='3': //Documents
+				 $('#docs > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
       	break
       
-       case theAltKey && theKey==='4': //Documents
-				 $('#docs > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+       case theAltKey && theKey==='4': //Diease
+     		 $('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
       	break
       
   		default:
