@@ -10,11 +10,11 @@
 // ==/UserScript==
 //window.moveTo(300, 100)
 
+ ///FOR TICKLER KEYBOARD SHORTCUT TO BE ENABLED
 
-//FOR BOTH LABS AND DOCUMENT REVIEW 
 
 
-///KEYBOARD SHORCUTS
+
 document.addEventListener('keydown', function(theEvent) {
 	var theKey = theEvent.key
 	var theAltKey =theEvent.altKey;
@@ -22,51 +22,20 @@ document.addEventListener('keydown', function(theEvent) {
 	var theShiftKey= theEvent.shiftKey;
 
 	switch(true){
-      //Acknowledge  
+      //Acknowledge  button
     case theAltKey && theKey==='1': 
       
- 			var button = ""
-      if (window.location.pathname.includes("labDisplay.jsp")){
-      var button = $('input[type="button"][value="Acknowledge"]')
-      }else{
-      var button = $('input[type="submit"][value="Acknowledge"]')
-      }
-      
-  		var parentId = $(button).closest('form').attr('id');
-  		if (parentId.includes('acknowledge')){
-        var labelButton = $('input[type="button"][value="Label"][id*="Label"]')
-        var saveButton = $('input[type="submit"][name="save"][id*="save"]')
-     		if (window.location.pathname.includes("labDisplay.jsp")){
-        labelButton.click()
-        }else{
-        saveButton.click()
-        }
-   		 	
-  			button[0].click()
-        
-  		}
+      showAlert()
 			break;
       
-      //Tickler Button
+      //Tickler 
 		case theAltKey && theKey==='2': 
- 			var button = $('input[type="button"][value="Tickler"]') 
-  		var parentId = $(button).closest('form').attr('id')
-  		if (parentId.includes('acknowledge')){
-  			button.click()
-  		}
+ 			showAlert1()
 			break;
       
       //Echart
     case theAltKey && theKey==='3': 
- 			var button = $('input[type="button"][value="eChart"]') 
-  		var parentId = $(button).closest('form').attr('id')
-  		if (parentId.includes('acknowledge')){
-  			 var button = $('input[type="button"][value*="Chart"]') 
-         var parentId = $(button).closest('form').attr('id')
-         if (parentId.includes('acknowledge')){
-           button.click()
-         }
-  		}
+ 			showAlert2()
 			break;
       
     case theAltKey && theKey==='q': //back page
@@ -140,8 +109,20 @@ document.addEventListener('keydown', function(theEvent) {
 	}
 }, true);
 
-//----------------------------------------------------------------------------------------------------------------------------------
-//BUTTONS ON PAGE
+//New input box that follows the page
+var inputTextbox = document.createElement('input');
+inputTextbox.type = 'text';
+inputTextbox.id = 'newTextBoxInput'
+inputTextbox.name = 'newTextBoxInput'
+inputTextbox.value = ""
+
+if (window.location.pathname.includes("labDisplay.jsp")){
+	inputTextbox.setAttribute('style', 'width:140px;font-size:12px;padding:0px;position:fixed;top:58px;left:538px;');
+	document.body.appendChild(inputTextbox);
+}
+
+
+//ACKNOWLEDGE BUTTON
 var input = document.createElement('input');
 input.type = 'button';
 input.value = 'Acknow';
@@ -156,7 +137,7 @@ input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;
 document.body.appendChild(input);
 function showAlert()
 {
-  
+  //Covering the dumb various codings of the acknowledge button
   var button = ""
   if (window.location.pathname.includes("labDisplay.jsp")){
   var button = $('input[type="button"][value="Acknowledge"]')
@@ -166,13 +147,28 @@ function showAlert()
   
   var parentId = $(button).closest('form').attr('id');
   if (parentId.includes('acknowledge')){
-    var labelButton = $('input[type="button"][value="Label"][id*="Label"]')
-    var saveButton = $('input[type="submit"][name="save"][id*="save"]')
-  
-    if (window.location.pathname.includes("labDisplay.jsp")){
-      labelButton.click()
-      console.log(labelButton)
-    }else{
+    
+    //weird lab/transcriptions page
+    if (window.location.pathname.includes("labDisplay.jsp")){ 
+     
+    //Acknowledge will also auto click label if there is text in label. 
+    //If nothing in text box then won't click Label button
+    var labelButton = $('[type="button"][value="Label"][id*="Label"]') 
+    var labelEntry = $('input[id*="acklabel"][type="text"][name*="label"]')
+    var labelEntryID = labelEntry.attr('id')
+    var labelElement = document.getElementById(labelEntryID);
+
+    //Check secondary textbox for value, input to original text box
+    var newTextBoxVal = document.getElementById('newTextBoxInput').value
+    labelElement.value = newTextBoxVal
+		var labelEntryText = labelEntry.val()
+    
+    	if (labelEntryText.length >0){ //check if anything in text box. 
+    		labelButton.click()
+    	}
+      
+    }else{//Edoc page
+      var saveButton = $('input[type="submit"][name="save"][id*="save"]')
       saveButton.click()
     }
     
@@ -233,12 +229,17 @@ if (window.location.pathname.includes("labDisplay.jsp")){
   input3.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:40px;left:640px;');
   document.body.appendChild(input3);
   function showAlert3(){
-    var docNameDiv = $('div.FieldData:contains("Requesting Client")')
-		var fullName = docNameDiv.text().split('`r')[1]
-		var lastName = fullName.split(' ')[1]
-		var firstName = fullName.split(' ')[0]
-		alert(fullName)
-	}
+    console.log("pressed Specialty")
+   	console.log(document.getElementById('newTextBoxInput').value)
+ 		
+  }
+    
+    //var docNameDiv = $('div.FieldData:contains("Requesting Client")')
+		//var fullName = docNameDiv.text().split('`r')[1]
+		//var lastName = fullName.split(' ')[1]
+		//var firstName = fullName.split(' ')[0]
+		//alert(fullName)
+
 }
 
 
