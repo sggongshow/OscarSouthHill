@@ -114,11 +114,27 @@ var inputTextbox = document.createElement('input');
 inputTextbox.type = 'text';
 inputTextbox.id = 'newTextBoxInput'
 inputTextbox.name = 'newTextBoxInput'
-//inputTextbox.value = ""
 
 
+//get original text field value
+var OGLabelObj = $('span[id*=labelspan][class=Field2]')
+var OGLabelText = OGLabelObj.text()
+//console.log(OGLabelText.length)
+//console.log(OGLabelText.includes("("))
+if (OGLabelText.includes("(") == false){
+   //console.log(OGLabelText.includes("test"))
+	OGLabelText = OGLabelText.split(":")[1]
+  //console.log(OGLabelText)
+  OGLabelText = OGLabelText.substring(1)
+   //console.log(OGLabelText)
+}else{
+  OGLabelText=""
+}
+
+inputTextbox.value = OGLabelText
+  
 if (window.location.pathname.includes("labDisplay.jsp")){
-	inputTextbox.setAttribute('style', 'width:140px;font-size:12px;padding:0px;position:fixed;top:58px;left:518px; border-color:red;');
+	inputTextbox.setAttribute('style', 'width:120px;font-size:12px;padding:0px;position:fixed;top:20px;left:518px; border-color:red;');
 	document.body.appendChild(inputTextbox);
 }
 
