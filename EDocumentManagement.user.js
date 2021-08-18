@@ -64,3 +64,26 @@ function showAlert2()
   window.location = (newURL + "");
 }
 
+var input3 = document.createElement('input');
+input3.type = 'button';
+input3.value = 'Imaging';
+input3.onclick = showAlert3;
+input3.setAttribute('style', 'width:60px;height:20px;font-size:14px;z-index:1;position:fixed;top:0px;left:580px; background-color:#66ff66;');
+document.body.appendChild(input3);
+function showAlert3()
+{
+  window.location = (newURL + "radiology");
+}
+
+
+var input4 = document.createElement('input');
+input4.type = 'button';
+input4.value = 'Legal';
+input4.onclick = showAlert4;
+input4.setAttribute('style', 'width:60px;height:20px;font-size:14px;z-index:1;position:fixed;top:0px;left:640px; background-color:#66ff66;');
+document.body.appendChild(input4);
+function showAlert4()
+{
+  window.location = (newURL + "legal");
+}
+
