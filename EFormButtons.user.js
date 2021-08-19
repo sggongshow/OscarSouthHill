@@ -8,68 +8,33 @@
 // ==/UserScript==
 //window.moveTo(300, 100)
 
-/*
-function setCookie(cname, cvalue, exdays, cpath)
-{
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  //d.setTime(d.getTime() + (exdays * 5000));
-  var expires = 'expires=' + d.toGMTString();
-  document.cookie = cname + '=' + cvalue + '; ' + expires + '; ' + cpath
-}
-function getCookie(cname)
-{
-  var name = cname + '=';
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++)
-  {
-    var c = ca[i].trim();
-    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-  }
-  return '';
-} //x = $('#enTemplate');
-//x.css('background-color', 'yellow');
-*/
+window.addEventListener('load', function() {
+  var textBox = $('textarea[name="textarea"]')
+  textBox.select()  
+}, false);
 
-/* ///FOR TICKLER KEYBOARD SHORTCUT TO BE ENABLED
-
-var myWindow = ''
-var elements = (window.location.pathname.split('/', 2))
-firstElement = (elements.slice(1)) //alert(firstElement)
-vPath = ('https://' + location.host + '/' + firstElement + '//') 
-
-
-//alert(vPath)
-
-var myParam = location.search.split('demographic_no=') [1] 
-var res = myParam.indexOf('&')
-var demo_no = myParam
-if (res > 0){
-	var demo_no = myParam.substring(0, res)
-}
-//alert('res ' + res)
-//alert('Demo ' + demo_no)
 
 document.addEventListener('keydown', function(theEvent) {
 	var theKey = theEvent.key
 	var theAltKey =theEvent.altKey;
 	var theCtrlKey = theEvent.ctrlKey;
 	var theShiftKey= theEvent.shiftKey;
-
-	switch(true){
-		case theAltKey && theKey==='t': //Tickler 
- 			var formPath = vPath + '/tickler/ticklerAdd.jsp?demographic_no=' + demo_no //var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
-  		//alert(formPath)
-  		window.open(formPath, 'Popup_Window', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
-			//https://doctors-office-surrey.kai-oscar.com/oscar/tickler/ticklerAdd.jsp?demographic_no=5
+  
+  
+  switch(true){
+      //Confirm  button
+    case theAltKey && theKey==='1':
+      showAlert()
+    
 			break;
       
     default:
-      break;
-
-	}
+      break; 
+  }
+  
+  
 }, true);
-*/
+
 
 var input = document.createElement('input');
 input.type = 'button';
