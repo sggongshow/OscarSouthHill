@@ -181,15 +181,16 @@ function showAlert()
     var saveButton = $('input[type="submit"][name="save"][id*="save"]')
     saveButton.click()
   }
-  
+  console.log("test")
   //click acknowledge button or close if no acknowledge button  	
   var button
-  if (window.location.pathname.includes("labDisplay.jsp")){
-  var button = $('input[type="button"][value="Acknowledge"]')[0]
-  }else{
-  var button = $('input[type="submit"][value="Acknowledge"]')[0]
+  //if (window.location.pathname.includes("labDisplay.jsp")){
+  button = $('input[type="button"][value="Acknowledge"]')[0]
+  //}else{
+  if (button == null){
+  button = $('input[type="submit"][value="Acknowledge"]')[0]
   }
-  
+  console.log(button)
   // if no ack, close button instead
   if (button == null){
     button = $('input[type="button"][value*="Close"]')
@@ -241,6 +242,8 @@ function showAlert2()
  
 }
 
+var NameSearchWin
+var NameSearchWinDoc
 
 var docNameDiv = $('div.FieldData:contains("Requesting Client")')
 var fullName = docNameDiv.text().split(':')[1]
@@ -255,16 +258,23 @@ if (window.location.pathname.includes("labDisplay.jsp")){
   input3.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:40px;left:640px;');
   document.body.appendChild(input3);
   function showAlert3(){
-    console.log("pressed Specialty")
-   	console.log(document.getElementById('newTextBoxInput').value)
- 		
-  }
+		//console.log("testspeci")
+    var docNameDiv = $('div.FieldData:contains("Requesting Client")')
+    //console.log(docNameDiv.text())
+		var fullName = docNameDiv.text().split('\n')[2]
+    var fullName = fullName.trim()
     
-    //var docNameDiv = $('div.FieldData:contains("Requesting Client")')
-		//var fullName = docNameDiv.text().split('`r')[1]
-		//var lastName = fullName.split(' ')[1]
-		//var firstName = fullName.split(' ')[0]
-		//alert(fullName)
+    var splitName = fullName.split(' ')
+		var lastName = splitName[splitName.length -1]
+		var firstName = splitName[0]
+		console.log(lastName)
+  	console.log(firstName)
+    NameSearchWin = window.open("https://www.cpsbc.ca/public/registrant-directory/search-result"); 
+		NameSearchWinDoc = NameSearchWin.document;
+    
+    console.log(NameSearchWin)
+    console.log(NameSearchWinDoc)
+     }
 
 }
 
