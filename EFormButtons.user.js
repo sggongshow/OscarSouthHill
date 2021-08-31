@@ -39,7 +39,7 @@ document.addEventListener('keydown', function(theEvent) {
 
 var input = document.createElement('input');
 input.type = 'button';
-input.value = 'Submit';
+input.value = 'Submit.';
 input.onclick = showAlert
 input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:0px;left:0px; background-color:#66ff66;');
 input.classList.add('DoNotPrint')
@@ -49,14 +49,14 @@ function showAlert()
 	var subButton = $('input[type="submit"][value="Submit"]')
   //console.log(subButton)
   if (subButton.length <1){
-    subButton = $('input[type="button"][value="Submit"]')
+    subButton = $('#SubmitButton')
     //console.log("note1")
-    //console.log(subButton)
+    console.log(subButton)
   }
   if(subButton.length <1){
-		subButton = $('#SubmitButton')
+		subButton = $('input[type="button"][value="Submit"][value*="Submit"]')
     //console.log("note2")
-    //console.log(subButton)
+    console.log(subButton.length)
   }
      
   //console.log(subButton)
