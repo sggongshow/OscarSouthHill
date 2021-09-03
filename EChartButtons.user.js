@@ -427,3 +427,72 @@ function showAlert180()
 {
   window.open(vPath + 'oscarEncounter/oscarMeasurements/TemplateFlowSheet.jsp?demographic_no='+demo_no+'&template=diab2')
 }   
+
+
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+//----------------------------------------------------------------------
+// FOR CURRENT TEXT BOX, ADJUST THE DATE SO THAT IT IS CORRECT
+
+
+function main(){
+  //console.log('main called')
+  var newestNote = $('textarea[name*=caseNote][id*=caseNote]')[0]
+  //console.log(newestNote)
+  var noteText = newestNote.value
+  var noteDate = noteText.split(':')[0]
+  var noteExtra = noteText.split(':')[1]
+  
+  //console.log(noteText)
+  //console.log(noteDate)
+  //console.log(noteExtra)
+  
+  
+  var today = new Date().toString()
+  var todayArr = today.split(' ')
+  var day = todayArr[2]
+  var month = todayArr[1]
+  var year = todayArr[3]
+  var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
+  
+  newestNote.value = newDateString
+  console.log('Date modified')
+  //console.log(newDateString)
+  //console.log(newestNote)
+  //console.log(noteText)
+  
+}
+
+function waitForNote() {
+  var newestNote = $('#nc20')
+  if (newestNote.length<1) {
+    //console.log('Did not find thing')
+    setTimeout(function() {
+      waitForNote()
+    }, 200);
+    
+  } else {
+    //console.log('found thing')
+    main()
+  }
+};
+
+
+
+window.addEventListener('load', function() {
+  //setTimeout(function(){ main(); }, 1500)
+  waitForNote()
+
+
+}, false);
+
+
+
+
+
+
+
+
+
+
+
