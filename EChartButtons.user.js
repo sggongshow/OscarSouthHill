@@ -75,13 +75,15 @@ function showAlert2()
 }
 var input3 = document.createElement('input');
 input3.type = 'button';
-input3.value = 'Rx';
+input3.value = 'LabGrid';
 input3.onclick = showAlert3;
 input3.setAttribute('style', 'width:60px;font-size:16px;z-index:1;position:fixed;bottom:120px;right:0px; background-color: #ffff00;');
 document.body.appendChild(input3);
 function showAlert3()
 {
-  $('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+  //$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+  var formPath = vPath + '/lab/CumulativeLabValues.jsp?demographic_no=' + demo_no
+  window.open(formPath,'Popup_Window', 'width=800,height=800,left =0,top = 0')
 }
 var input4 = document.createElement('input');
 input4.type = 'button';
@@ -436,14 +438,14 @@ function showAlert180()
 
 
 function main(){
-  //console.log('main called')
+  console.log('main called')
   var newestNote = $('textarea[name*=caseNote][id*=caseNote]')[0]
   //console.log(newestNote)
   var noteText = newestNote.value
   var noteDate = noteText.split(':')[0]
   var noteExtra = noteText.split(':')[1]
   
-  //console.log(noteText)
+ // console.log(noteText)
   //console.log(noteDate)
   //console.log(noteExtra)
   
@@ -456,7 +458,7 @@ function main(){
   var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
   
   newestNote.value = newDateString
-  console.log('Date modified')
+  //console.log('Date modified')
   //console.log(newDateString)
   //console.log(newestNote)
   //console.log(noteText)
@@ -465,7 +467,10 @@ function main(){
 
 function waitForNote() {
   var newestNote = $('#nc20')
-  if (newestNote.length<1) {
+  var newestNote2 = $('#nc00')
+  //console.log(newestNote)
+  //console.log(newestNote2)
+  if ((newestNote.length<1) && (newestNote2.length<1) ) {
     //console.log('Did not find thing')
     setTimeout(function() {
       waitForNote()
