@@ -442,8 +442,8 @@ function main(){
   var newestNote = $('textarea[name*=caseNote][id*=caseNote]')[0]
   //console.log(newestNote)
   var noteText = newestNote.value
-  var noteDate = " " + noteText.split(':')[0]
-  var noteExtra = noteText.split(':')[1]
+  var noteDate =  noteText.split(':')[0]
+  var noteExtra = " " + noteText.split(':')[1]
   
  // console.log(noteText)
   //console.log(noteDate)
