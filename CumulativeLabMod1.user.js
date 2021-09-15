@@ -65,7 +65,8 @@ $('.TopStatusBar').append(radioBtn5)
 //$('.TopStatusBar').append('Select_All')
 $('.TopStatusBar').append(radioBtn6)
 
-var myLabArray = new Array() //Array of labs and accocia
+var myLabArray = new Array() //Array of labs and associated lab codes
+var myLabArrayDate = new Array()
 var HEPArray = [
   '1742-6',
   '1920-8',
@@ -179,6 +180,7 @@ var measureDateArray = [];
 var alldata = [];
 var checkedValues = ''
 var LabDataPrint = ''
+var myLabArray = []
 
 var topDates = [
   new Date('1990-01-01'), 
@@ -231,9 +233,9 @@ if (location.search) {
   var myArray = []
   var checkedValues = []
 
-  for (i = 0; i < parts.length - 1; i++) { //Creation of myLabArray with 3 other values
-    myLabArray[i] = new Array(3)
-  }
+  //for (i = 0; i < parts.length - 1; i++) { //Creation of myLabArray with 3 other values
+    //myLabArray[i] = new Array(3)
+  //}
   
   for (i = 0; i < parts[i].length; i++) { //parts[i].length
 
@@ -281,10 +283,11 @@ for (i = 0; i < myArray.length; i++) {
   myArray[i] = '<font size = \'1\'>' + myArray[i].substring(startat, endat) + '<input name=\'checkbox\' id=' + ('myCheckBox' + i) + chkval + ' value=' + loincval + ' type=\'checkbox\'>' + (namestring + ' (' + loincval + ') ') + '<br>'
   Newlist = Newlist + myArray[i] // alert(Newlist)
 }
-//console.log(myArray)
+
 ///////CHUNK 2 END
 
 Cumulative()
+//removeUnwanted()
 
 var updateBtn = document.createElement('input');
 updateBtn.type = 'button';
@@ -302,53 +305,40 @@ if (params.demographicNo) {
   input2.setAttribute('type', 'hidden');
 }
 
-
+getDate()
 //window.addLabToProfile2
 radioBtn5.click()
 
+//console.log(myLabArray)
 //-------------------------------------------------------------------
 //-----Test area-------------------------------------------------------------
 
-function colorDates(date,divVar){
-  var colorArr = [
-    '2px solid #00FF00',
-    '2px solid #009900',
-    '2px solid #00FFFF',
-    '2px solid #9933FF',
-    '2px solid #FFFF00'  
-    ]
-  //console.log(topDates)
+function sortDate(){
+
+
+
+}
+
+function getDate(){
+  console.log('getdate')
   var LabDateRawArr = $('div[id*=preventionProcedure]')
+  console.log(LabDateRawArr)
+  console.log(myLabArray)
   for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
   	var RawText = LabDateRawArr[i].innerHTML 
     RawText = RawText.split('<p')[1]
-    RawText = RawText.split('p>')[0]    
-    RawText = RawText.substring(RawText.lastIndexOf(';')+1)
+    RawText = RawText.split('p>')[0]
+    //console.log(RawText)
+    RawText = RawText.substring(RawText.lastIndexOf(' ')+1)
     RawText = RawText.trim()
-    RawText = RawText.split(' ')[0]
+    RawText = RawText.split('</')[0]
     var eleDate = new Date(RawText)
     
-    if (+eleDate == +topDates[0]) {
-      //console.log('y')
-  		LabDateRawArr[i].style.border = colorArr[0]      
-    }else if (+eleDate == +topDates[1]) {
-      //console.log('y1')
-     	LabDateRawArr[i].style.border = colorArr[1]      
-    }else if (+eleDate == +topDates[2]) {
-      //console.log('y2')
-     	LabDateRawArr[i].style.border = colorArr[2]      
-    }else if (+eleDate == +topDates[3]) {
-      //console.log('y3')
-     	LabDateRawArr[i].style.border = colorArr[3]      
-    }else if (+eleDate == +topDates[4]) {
-      //console.log('y4')
-     	LabDateRawArr[i].style.border = colorArr[4]      
+    
+    
     }
-      
-  }
-  
+    
 }
-
 
 
 //-------------------------------------------------------------------
@@ -375,6 +365,48 @@ function sortDate(arrayDate){
   //return arrayDate
 }
 
+//color the borders of the dates based on how old they are
+function colorDates(date,divVar){
+  var colorArr = [
+    '2px solid #00ff00', 
+    '2px solid #00ffff', 
+    '2px solid #ffff00', 
+    '2px solid #0080ff',
+    '2px solid #8000ff'  
+    ]
+  //console.log(topDates)
+  var LabDateRawArr = $('div[id*=preventionProcedure]')
+  for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
+  	var RawText = LabDateRawArr[i].innerHTML 
+    RawText = RawText.split('<p')[1]
+    RawText = RawText.split('p>')[0]
+    //console.log(RawText)
+    RawText = RawText.substring(RawText.lastIndexOf(' ')+1)
+    RawText = RawText.trim()
+    RawText = RawText.split('</')[0]
+    var eleDate = new Date(RawText)
+    //console.log(eleDate)
+    if (+eleDate == +topDates[0]) {
+      //console.log('y')
+  		LabDateRawArr[i].style.border = colorArr[0]      
+    }else if (+eleDate == +topDates[1]) {
+      //console.log('y1')
+     	LabDateRawArr[i].style.border = colorArr[1]      
+    }else if (+eleDate == +topDates[2]) {
+      //console.log('y2')
+     	LabDateRawArr[i].style.border = colorArr[2]      
+    }else if (+eleDate == +topDates[3]) {
+      //console.log('y3')
+     	LabDateRawArr[i].style.border = colorArr[3]      
+    }else if (+eleDate == +topDates[4]) {
+      //console.log('y4')
+     	LabDateRawArr[i].style.border = colorArr[4]      
+    }
+      
+  }
+  
+}
+
 function findNewestDate(){
 	topDatesReset()
   
@@ -382,19 +414,43 @@ function findNewestDate(){
   var LabDateRawArr = $('div[id*=preventionProcedure]')
   //console.log(LabDateRawArr[0].innerHTML)
   //console.log(LabDateRawArr)
+  //console.log(LabDateRawArr[1])
 
   
-  for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
-  	var RawText = LabDateRawArr[i].innerHTML 
-    //console.log(RawText)
-    /*//chunk to get rid of Time from text
-    var ReplaceText = RawText
-    ReplaceText = ReplaceText.substring(0,ReplaceText.lastIndexOf(' '))  
-    LabDateRawArr[i].innerHTML =ReplaceText
-		*/
+  for (i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
+  	var RawText = LabDateRawArr[i].innerHTML
+		var DateHolder = '' 
+		
+    //removal of times and bolding of values
+    if (RawText.indexOf('</b>')>=0){
+      console.log('nextline')
+      var PreP = RawText.split('<p')[0] + '<p'
+      var innerP = RawText.split('<p')[1].split('p>')[0] 
+      var PostP = 'p>' +  RawText.split('p>')[1]
+      
+      
+      PreP = PreP + innerP.substring(0,innerP.indexOf('>')) + '>'
+      innerP = innerP.substring(innerP.indexOf('>')+1,innerP.indexOf('</'))
+      PostP =  '</' + PostP
+      innerP = innerP.substring(0,innerP.lastIndexOf(' '))
+      
+      var lineBreakIndex = innerP.lastIndexOf('&nbsp;')
+      innerP = '<b>' + innerP.substring(0,lineBreakIndex) + '</b> <br>' + innerP.substring(lineBreakIndex) 
+      LabDateRawArr[i].innerHTML =PreP + innerP + PostP
+      
+  	}else{ // for the non-first column suff
+      var ReplaceText = RawText
+      ReplaceText = ReplaceText.trim()
+      ReplaceText = ReplaceText.substring(0,ReplaceText.lastIndexOf(' ')) 
+      var lineBreakIndex = ReplaceText.lastIndexOf(' ')
+      ReplaceText = '<b>' + ReplaceText.substring(0,lineBreakIndex) + '</b> <br>' + ReplaceText.substring(lineBreakIndex)   
+      LabDateRawArr[i].innerHTML =ReplaceText
+    }
+    
     //chunk to get Date from Raw text
+
     RawText = RawText.split('<p')[1]
-    RawText = RawText.split('p>')[0]    
+    RawText = RawText.split('p>')[0]
     RawText = RawText.substring(RawText.lastIndexOf(';')+1)
     RawText = RawText.trim()
     RawText = RawText.split(' ')[0]
@@ -405,6 +461,7 @@ function findNewestDate(){
     //console.log(eleDate.toString())
 		//console.log(topDatesStr.indexOf(eleDate.toString()))
     
+    //console.log(eleDate)
     if (topDatesStr.indexOf(eleDate.toString()) <0){
       topDates.push(eleDate)
       sortDate(topDates)
@@ -414,7 +471,6 @@ function findNewestDate(){
     
     
   }
-
   
   //console.log(topDates)
   
@@ -481,8 +537,17 @@ function myDisplay() {
 }
 
 function Cumulative() {
-  for (i = 0; i < parts[i].length; i++) {
+  //console.log('cumulative')
+  //console.log(parts.length)
+  //console.log(parts)
+  //console.log(myLabArray)
+  for (i = 0; i < parts.length; i++) {
     parts[i]= parts[i].trim()
+    
+    if(parts[i].indexOf('addLabToProfile2(') < 0){
+      continue
+    }
+    
     var frontRemoved = parts[i].split('addLabToProfile2(')[1]
 		
     var indexLastBrac = frontRemoved.lastIndexOf(')')
@@ -491,16 +556,65 @@ function Cumulative() {
     
     var noquote = backRemoved.replace(/'/g, '');
     var FinalArray = noquote.split(',') 
+    //console.log(FinalArray)
     var name = FinalArray[1]
     var Code = FinalArray[2] 
     var HL7 = FinalArray[0]
     
-    myLabArray[i][1] = HL7
-    myLabArray[i][0] = name
-    myLabArray[i][2] = Code
     
-  }
+    var tempArr = [name,HL7,Code]
+    //console.log(tempArr)
+		myLabArray.push(tempArr)
+    //myLabArray[i][1] = HL7
+    //myLabArray[i][0] = name
+    //myLabArray[i][2] = Code
+    
+
+    /*
+    //Words and reports to be triggers for removal from the Cum Lab page
+    var toDelete = 0
+    var unwantedWords = ['physician', 'report', 'history', 'notification', 'consultation'] 
+    for (j = 0; j < unwantedWords.length; j++) {
+      if (name.toLowerCase().indexOf(unwantedWords[j]) >= 0){
+        toDelete = 1
+        //console.log('removed ' + name)
+      }
+    }
+    //if not triggered to be deleted then have it removed. 
+    if (toDelete == 0){
+      	//console.log(name)
+      	var PushArr = [name,HL7,Code]
+        console.log(PushArr)
+      	myLabArray.push(PushArr)
+    	  //myLabArray[i][1] = HL7
+        //myLabArray[i][0] = name
+        //myLabArray[i][2] = Code
+    }*/
+  }  
+  //console.log('end cumulative')
   //console.log(myLabArray)
+  removeUnwanted()
+}
+
+//Removed lines that are weird info and not labs
+function removeUnwanted() {
+  		//console.log('remove unwanted')
+  		var unwantedWords = ['physician', 'report', 'history', 'notification', 'consultation',
+                           'other','colonoscopy','pathology','surgical','operation', 'discharge']
+      for (i = myLabArray.length -1  ; i >= 0 ; i--) {
+				var toDelete = 0
+    		for (j = 0; j < unwantedWords.length; j++) {
+                if (myLabArray[i][0].toLowerCase().indexOf(unwantedWords[j]) >= 0){
+                    toDelete = 1
+                    //console.log('removed ' + name)
+                }   
+            }
+        if (toDelete == 1){
+         	//console.log('removed ' + myLabArray[i][0])
+         	myLabArray.splice(i,1) 
+        } 
+      }
+      //console.log(myLabArray)
 }
 
 
