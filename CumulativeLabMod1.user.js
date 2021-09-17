@@ -67,6 +67,7 @@ $('.TopStatusBar').append(radioBtn6)
 
 var myLabArray = new Array() //Array of labs and associated lab codes
 var myLabArrayDate = new Array()
+var visibleLabValueArr = new Array()
 var HEPArray = [
   '1742-6',
   '1920-8',
@@ -298,6 +299,10 @@ updateBtn.setAttribute('style', 'font-size:12px;position:absolute;top:10px;right
 document.body.appendChild(updateBtn);
 
 
+//------Extend horizontally so now lab value wrapping
+var labDivContainer = $('#cumulativeLab')[0]
+labDivContainer.style.minWidth = '3000px'
+
 
 if (params.mysort) {
 }
@@ -305,7 +310,7 @@ if (params.demographicNo) {
   input2.setAttribute('type', 'hidden');
 }
 
-getDate()
+//getDate()
 //window.addLabToProfile2
 radioBtn5.click()
 
@@ -320,25 +325,39 @@ function sortDate(){
 }
 
 function getDate(){
+  topDatesReset()
+  visibleLabValueArr = []
+  
   console.log('getdate')
   var LabDateRawArr = $('div[id*=preventionProcedure]')
-  console.log(LabDateRawArr)
-  console.log(myLabArray)
+	
   for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
-  	var RawText = LabDateRawArr[i].innerHTML 
-    RawText = RawText.split('<p')[1]
-    RawText = RawText.split('p>')[0]
-    //console.log(RawText)
+    var id = LabDateRawArr[i].id
+  	var RawText = LabDateRawArr[i].innerText
+		RawText = RawText.substring(0, RawText.lastIndexOf(' '))
     RawText = RawText.substring(RawText.lastIndexOf(' ')+1)
     RawText = RawText.trim()
-    RawText = RawText.split('</')[0]
+    //console.log(RawText)
     var eleDate = new Date(RawText)
     
+    var fillerArr = [id,eleDate]
+    visibleLabValueArr.push(fillerArr)
     
-    
+    //chunk to get Dates and organize to top list
+    var eleDate = new Date(RawText)
+    var topDatesStr = topDates.toString()
+    if (topDatesStr.indexOf(eleDate.toString()) <0){
+      topDates.push(eleDate)
+      sortDate(topDates)
+      topDates.pop()
     }
-    
+  }
+
+  //console.log(topDates) 
+  //console.log(visibleLabValueArr)
 }
+
+
 
 
 //-------------------------------------------------------------------
@@ -365,6 +384,26 @@ function sortDate(arrayDate){
   //return arrayDate
 }
 
+//----- Expands the lab name column so it isn't cut off
+function expandLabName(){
+	var labBoxArr = $('a[id*=ahead][id*=.]')
+  //console.log(labBoxArr)
+	for (i=0; i<labBoxArr.length; i++){//labBoxArr.length
+    var RawHTML = labBoxArr[i].innerHTML
+    var LabName = labBoxArr[i].title.split('header')[1]
+    LabName = LabName.split(']')[0]
+    LabName = LabName.split('[')[1]
+    //console.log(LabName)
+    
+    var PreText = RawHTML.split('>')[0] + '>'
+    var PostText = '</' + RawHTML.split('</')[1]
+    labBoxArr[i].innerHTML = PreText + LabName + PostText
+  }
+}
+
+
+
+
 //color the borders of the dates based on how old they are
 function colorDates(date,divVar){
   var colorArr = [
@@ -376,54 +415,70 @@ function colorDates(date,divVar){
     ]
   //console.log(topDates)
   var LabDateRawArr = $('div[id*=preventionProcedure]')
-  for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
-  	var RawText = LabDateRawArr[i].innerHTML 
-    RawText = RawText.split('<p')[1]
-    RawText = RawText.split('p>')[0]
-    //console.log(RawText)
-    RawText = RawText.substring(RawText.lastIndexOf(' ')+1)
-    RawText = RawText.trim()
-    RawText = RawText.split('</')[0]
-    var eleDate = new Date(RawText)
+  //console.log(LabDateRawArr.length)
+  for (i=0; i<visibleLabValueArr.length; i++){ //LabDateRawArr.length
+    var idVal = visibleLabValueArr[i][0]
+    var idObj = document.getElementById(idVal)
+    var eleDate = visibleLabValueArr[i][1]
+
     //console.log(eleDate)
     if (+eleDate == +topDates[0]) {
       //console.log('y')
-  		LabDateRawArr[i].style.border = colorArr[0]      
+  		idObj.style.border = colorArr[0]      
     }else if (+eleDate == +topDates[1]) {
       //console.log('y1')
-     	LabDateRawArr[i].style.border = colorArr[1]      
+     	idObj.style.border = colorArr[1]      
     }else if (+eleDate == +topDates[2]) {
       //console.log('y2')
-     	LabDateRawArr[i].style.border = colorArr[2]      
+     	idObj.style.border = colorArr[2]      
     }else if (+eleDate == +topDates[3]) {
       //console.log('y3')
-     	LabDateRawArr[i].style.border = colorArr[3]      
+     	idObj.style.border = colorArr[3]      
     }else if (+eleDate == +topDates[4]) {
       //console.log('y4')
-     	LabDateRawArr[i].style.border = colorArr[4]      
+     	idObj.style.border = colorArr[4]      
     }
       
   }
   
 }
 
-function findNewestDate(){
-	topDatesReset()
+//wait for all labs data to be loaded before modifying and putting colors around it. 
+function waitLabLoad(){
+  //console.log("waiting load")
+	var tableDiv = $('#cumulativeLab')[0]
+  var tableChildren = tableDiv.children
+  //console.log(tableChildren)
+  var failed = 0
   
-	//var LabDateRawArr = $('p[style]')
-  var LabDateRawArr = $('div[id*=preventionProcedure]')
-  //console.log(LabDateRawArr[0].innerHTML)
-  //console.log(LabDateRawArr)
-  //console.log(LabDateRawArr[1])
+  for (i=0; i<tableChildren.length; i++){
+    if (tableChildren[i].innerHTML.indexOf('pinwheel')>=0){
+     		 failed = 1
+    }
+    
+  }
+  if (failed == 1){
+    		setTimeout(function(){ waitLabLoad() }, 500);
+  }else{
+  	//console.log('finished waiting load labs')
+    expandLabName()
+    getDate()
+    labTextMod() 
+    //getDate()
+  }
+}
 
+//modifies the innerHTML of the lab values. Currently removes the Hour and bolds Lab Value
+function labTextMod(){ 
   
+  var LabDateRawArr = $('div[id*=preventionProcedure]')
   for (i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
   	var RawText = LabDateRawArr[i].innerHTML
 		var DateHolder = '' 
 		
     //removal of times and bolding of values
     if (RawText.indexOf('</b>')>=0){
-      console.log('nextline')
+      //console.log('nextline')
       var PreP = RawText.split('<p')[0] + '<p'
       var innerP = RawText.split('<p')[1].split('p>')[0] 
       var PostP = 'p>' +  RawText.split('p>')[1]
@@ -447,29 +502,8 @@ function findNewestDate(){
       LabDateRawArr[i].innerHTML =ReplaceText
     }
     
-    //chunk to get Date from Raw text
+    
 
-    RawText = RawText.split('<p')[1]
-    RawText = RawText.split('p>')[0]
-    RawText = RawText.substring(RawText.lastIndexOf(';')+1)
-    RawText = RawText.trim()
-    RawText = RawText.split(' ')[0]
-    var eleDate = new Date(RawText)
-		//console.log(i + " " + eleDate)
-    //Check if date is larger than stored then replace
-    var topDatesStr = topDates.toString()
-    //console.log(eleDate.toString())
-		//console.log(topDatesStr.indexOf(eleDate.toString()))
-    
-    //console.log(eleDate)
-    if (topDatesStr.indexOf(eleDate.toString()) <0){
-      topDates.push(eleDate)
-      sortDate(topDates)
-      topDates.pop()
-    }
-
-    
-    
   }
   
   //console.log(topDates)
@@ -520,8 +554,10 @@ function LoadMatchedArr(ArrayToLoad){
     //console.log(ArrayToLoad)
   	for(var i=0; i<ArrayToLoad.length; i++){  
       if (ArrayToLoad[i][2].match(/[a-z]/i)== null) { //Gets rid of non-labs. like PDF and Reports
-  			var LabElement = unsafeWindow.addLabToProfile2(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
-      	//console.log(LabElement)
+  			unsafeWindow.addLabToProfile2(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
+      	//var LabElement = addLabToProfile3(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
+
+        //console.log(LabElement)
       	}
     	}
 }
@@ -570,29 +606,8 @@ function Cumulative() {
     //myLabArray[i][2] = Code
     
 
-    /*
-    //Words and reports to be triggers for removal from the Cum Lab page
-    var toDelete = 0
-    var unwantedWords = ['physician', 'report', 'history', 'notification', 'consultation'] 
-    for (j = 0; j < unwantedWords.length; j++) {
-      if (name.toLowerCase().indexOf(unwantedWords[j]) >= 0){
-        toDelete = 1
-        //console.log('removed ' + name)
-      }
-    }
-    //if not triggered to be deleted then have it removed. 
-    if (toDelete == 0){
-      	//console.log(name)
-      	var PushArr = [name,HL7,Code]
-        console.log(PushArr)
-      	myLabArray.push(PushArr)
-    	  //myLabArray[i][1] = HL7
-        //myLabArray[i][0] = name
-        //myLabArray[i][2] = Code
-    }*/
   }  
-  //console.log('end cumulative')
-  //console.log(myLabArray)
+
   removeUnwanted()
 }
 
@@ -678,35 +693,37 @@ function CdmFunc() {
 	var MatchedArr = arrayMatch(CDMArray,LabIDArray)
   //console.log(MatchedArr)
   LoadMatchedArr(MatchedArr)
-  setTimeout(function(){ findNewestDate() }, 2500);
+  setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function CbcFunc() {
   EraseArea()
   var LabIDArray = getCol(myLabArray,2)
 	var MatchedArr = arrayMatch(CBCArray,LabIDArray)
   LoadMatchedArr(MatchedArr)
-  setTimeout(function(){ findNewestDate() }, 2500);
+  setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function InfFunc() {
   EraseArea()
   console.log("InfFunc")
-  setTimeout(function(){ findNewestDate() }, 2500);
+  setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function HepFunc() {
   EraseArea()
   console.log("HepFunc")
-  setTimeout(function(){ findNewestDate() }, 2500);
+  setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function AllFunc() {
   EraseArea()
   LoadMatchedArr(myLabArray)
   //setTimeout(function(){ replaceHeadClass() }, 2000);
-  setTimeout(function(){ findNewestDate() }, 2500);
+  setTimeout(function(){ waitLabLoad() }, 1000);
+
+ 
 }
 function ByDate() {
   EraseArea()
   //LoadMatchedArr(myLabArray)
-  //setTimeout(function(){ findNewestDate() }, 2500);
+  setTimeout(function(){ waitLabLoad() }, 1000);
   
 }
 
@@ -771,24 +788,33 @@ function addLabToProfile3(labType,testName,identCode){
 	console.log('test')
    var newNode = document.createElement('div');
    var img = document.createElement('img');
-   img.setAttribute('src','../images/osx-pinwheel.gif');
+   img.src = ('../images/osx-pinwheel.gif');
    console.log('test1')
+  
    newNode.appendChild(img);
+  
    var ran_number=Math.round(Math.random()*1000000);
    newNode.setAttribute('id','d'+ran_number);
    console.log('test2')
-   $('cumulativeLab').appendChild(newNode);
+  //console.log(newNode)
+   //console.log($('cumulativeLab'))
+   $('#cumulativeLab')[0].appendChild(newNode);
    
+  
+  
+  
    var url = "../lab/DisplayLabValue.jsp";
    var ran_number=Math.round(Math.random()*1000000);
-   var params = "demographicNo=3572&rand="+ran_number+"&labType="+labType+"&testName="+testName+"&identCode="+identCode;  //hack to get around ie caching the page
-   console.log('test3')
-  new Ajax.Updater(newNode,url, {method:'post',
+   var params = "demographicNo=6586&rand="+ran_number+"&labType="+labType+"&testName="+testName+"&identCode="+identCode;  //hack to get around ie caching the page
+   ///alert(params);  //'d'+ran_number
+  console.log('test4')
+   new Ajax.Updater(newNode,url, {method:'post',
                                           parameters:params,
                                           asynchronous:true,
                                            //onComplete: reRound
                                           evalScripts:true}); 
-  consolelog('test4')
+  	console.log('test5')
+  
   return newNode
 
 }
