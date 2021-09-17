@@ -4,7 +4,9 @@
 // @description Constant EForm Submit and Print button locations
 // @include     *billing.do?billRegion*
 // @include     *billingBC.jsp?*
+// @include     *CreateBilling.*
 // @include     */oscar/CaseManagementEntry.do*
+// @include     *SaveBilling.do?
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @version 15.2
 // ==/UserScript==
