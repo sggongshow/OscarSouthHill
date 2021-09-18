@@ -398,8 +398,7 @@ function expandLabName(){
      //console.log("finding empty")
      var children = sectionDivs[i].children
      if (children.length <=1){    	
-       sectionDivs[i].remove()
-       i--
+       sectionDivs[i].remove()    
      }
    }
   
