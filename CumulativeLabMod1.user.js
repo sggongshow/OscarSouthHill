@@ -49,10 +49,11 @@ radioBtn5.name = 'ALL'
 radioBtn5.onclick = AllFunc
 var radioBtn6= document.createElement('input');
 radioBtn6.type = 'button';
-radioBtn6.value = 'By Date';
-radioBtn6.id = 'By Date'
-radioBtn6.name = 'By Date'
+radioBtn6.value = 'Sort By Date';
+radioBtn6.id = 'SortByDate'
+radioBtn6.name = 'SortByDate'
 radioBtn6.onclick = ByDate
+radioBtn6.setAttribute('style', 'background-color: lime;')
 $('.TopStatusBar').append(radioBtn1)
 //$('.TopStatusBar').append('CDM_Group')
 $('.TopStatusBar').append(radioBtn2)
@@ -64,6 +65,17 @@ $('.TopStatusBar').append(radioBtn4)
 $('.TopStatusBar').append(radioBtn5)
 //$('.TopStatusBar').append('Select_All')
 $('.TopStatusBar').append(radioBtn6)
+//Sort button to Sort and Create the array of Lab Details
+
+var input2 = document.createElement('input');
+input2.type = 'button';
+input2.value = 'Sort';
+input2.onclick = showAlert2;
+input2.setAttribute('style', 'font-size:16px;position:absolute;top:0px;left:30px;');
+document.body.appendChild(input2);
+function showAlert2() {
+  myDisplay()
+}
 
 var myLabArray = new Array() //Array of labs and associated lab codes
 var myLabArrayDate = new Array()
@@ -199,16 +211,7 @@ var labDatesArr = []
 var DisplayArea = document.getElementById('cumulativeLab')
 
 
-//Sort button to Sort and Create the array of Lab Details
-var input2 = document.createElement('input');
-input2.type = 'button';
-input2.value = 'Sort';
-input2.onclick = showAlert2;
-input2.setAttribute('style', 'font-size:16px;position:absolute;top:0px;left:30px;');
-document.body.appendChild(input2);
-function showAlert2() {
-  myDisplay()
-}
+
 
 //Not sure why i need URL parameters
 var elements = (window.location.pathname.split('/', 2))
@@ -366,9 +369,9 @@ function waitLabLoad(){
     		setTimeout(function(){ waitLabLoad() }, 500);
   }else{
   	//console.log('finished waiting load labs')
-    expandLabName()
-    getDate()
-    labTextMod() 
+    setTimeout(function(){expandLabName()}, 200)
+    setTimeout(function(){getDate()}, 200)
+    setTimeout(function(){labTextMod() }, 400)
     //getDate()
   }
 }
@@ -392,10 +395,11 @@ function expandLabName(){
   
   var sectionDivs = $('div[id*=preventionSection][id*=.]')
   for (i=0; i<sectionDivs.length; i++){//sectionDivs.length
-     console.log("finding empty")
+     //console.log("finding empty")
      var children = sectionDivs[i].children
      if (children.length <=1){    	
        sectionDivs[i].remove()
+       i--
      }
    }
   
@@ -408,7 +412,7 @@ function getDate(){
   topDatesReset()
   visibleLabValueArr = []
   
-  console.log('getdate')
+  //console.log('getdate')
   var LabDateRawArr = $('div[id*=preventionProcedure]')
 	
   for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
@@ -433,12 +437,7 @@ function getDate(){
     }
   }
 
-  //-----TEST
-  var test = LabDateRawArr[1]
-  console.log(test)
-  
-  
-  
+
   
 }
 
@@ -529,12 +528,12 @@ function colorDates(date,divVar){
     }
       
   }
-  SortArea()
+  //SortArea()
 }
 
 //----Sorts visible labs on page to newest on top. 
 function SortArea(){
-  console.log('sortingbyDate')
+  //console.log('sortingbyDate')
   var marginObj
   
   var copyVisibleLabArr = new Array()
