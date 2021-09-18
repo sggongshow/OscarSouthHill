@@ -369,8 +369,8 @@ function waitLabLoad(){
     		setTimeout(function(){ waitLabLoad() }, 500);
   }else{
   	//console.log('finished waiting load labs')
-    setTimeout(function(){expandLabName()}, 200)
-    setTimeout(function(){getDate()}, 200)
+    expandLabName()
+  	getDate()
     setTimeout(function(){labTextMod() }, 400)
     //getDate()
   }
