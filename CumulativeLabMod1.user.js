@@ -318,12 +318,92 @@ radioBtn5.click()
 //-------------------------------------------------------------------
 //-----Test area-------------------------------------------------------------
 
-function sortDate(){
 
 
 
+
+
+
+//-------------------------------------------------------------------
+//FUNCTIONS
+//-------------------------------------------------------------------------
+function EraseArea(){
+  DisplayArea.innerHTML=''
 }
 
+function topDatesReset(){
+ topDates = [
+  new Date('1990-01-01'), 
+  new Date('1990-02-01'),
+  new Date('1990-03-01'),
+  new Date('1990-04-01'),
+  new Date('1990-05-01')
+  ] 
+}
+
+function sortDate(arrayDate){
+	arrayDate.sort(function(a,b){
+  	return b-a;
+  });
+  //return arrayDate
+}
+
+//wait for all labs data to be loaded before modifying and putting colors around it. 
+function waitLabLoad(){
+  //console.log("waiting load")
+	var tableDiv = $('#cumulativeLab')[0]
+  var tableChildren = tableDiv.children
+  //console.log(tableChildren)
+  var failed = 0
+  
+  for (i=0; i<tableChildren.length; i++){
+    if (tableChildren[i].innerHTML.indexOf('pinwheel')>=0){
+     		 failed = 1
+    }
+    
+  }
+  if (failed == 1){
+    		setTimeout(function(){ waitLabLoad() }, 500);
+  }else{
+  	//console.log('finished waiting load labs')
+    expandLabName()
+    getDate()
+    labTextMod() 
+    //getDate()
+  }
+}
+
+//----- Expands the lab name column so it isn't cut offf
+//----- Removes the ones with no lab values
+function expandLabName(){
+	var labBoxArr = $('a[id*=ahead][id*=.]')
+  //console.log(labBoxArr)
+	for (i=0; i<labBoxArr.length; i++){//labBoxArr.length
+    var RawHTML = labBoxArr[i].innerHTML
+    var LabName = labBoxArr[i].title.split('header')[1]
+    LabName = LabName.split(']')[0]
+    LabName = LabName.split('[')[1]
+    //console.log(LabName)
+    
+    var PreText = RawHTML.split('>')[0] + '>'
+    var PostText = '</' + RawHTML.split('</')[1]
+    labBoxArr[i].innerHTML = PreText + LabName + PostText
+  }
+  
+  var sectionDivs = $('div[id*=preventionSection][id*=.]')
+  for (i=0; i<sectionDivs.length; i++){//sectionDivs.length
+     console.log("finding empty")
+     var children = sectionDivs[i].children
+     if (children.length <=1){    	
+       sectionDivs[i].remove()
+     }
+   }
+  
+  
+  
+}
+
+//---- Array of every lab value's ID and it's Date. Also makes list of Top Dates
 function getDate(){
   topDatesReset()
   visibleLabValueArr = []
@@ -353,54 +433,63 @@ function getDate(){
     }
   }
 
-  //console.log(topDates) 
-  //console.log(visibleLabValueArr)
+  //-----TEST
+  var test = LabDateRawArr[1]
+  console.log(test)
+  
+  
+  
+  
 }
 
-
-
-
-//-------------------------------------------------------------------
-//FUNCTIONS
-//-------------------------------------------------------------------------
-function EraseArea(){
-  DisplayArea.innerHTML=''
-}
-
-function topDatesReset(){
- topDates = [
-  new Date('1990-01-01'), 
-  new Date('1990-02-01'),
-  new Date('1990-03-01'),
-  new Date('1990-04-01'),
-  new Date('1990-05-01')
-  ] 
-}
-
-function sortDate(arrayDate){
-	arrayDate.sort(function(a,b){
-  	return b-a;
-  });
-  //return arrayDate
-}
-
-//----- Expands the lab name column so it isn't cut off
-function expandLabName(){
-	var labBoxArr = $('a[id*=ahead][id*=.]')
-  //console.log(labBoxArr)
-	for (i=0; i<labBoxArr.length; i++){//labBoxArr.length
-    var RawHTML = labBoxArr[i].innerHTML
-    var LabName = labBoxArr[i].title.split('header')[1]
-    LabName = LabName.split(']')[0]
-    LabName = LabName.split('[')[1]
-    //console.log(LabName)
+//modifies the innerHTML of the lab values. Currently removes the Hour and bolds Lab Value
+function labTextMod(){ 
+  
+  var LabDateRawArr = $('div[id*=preventionProcedure]')
+  for (i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
+  	var RawText = LabDateRawArr[i].innerHTML
+    var labRange = LabDateRawArr[i].title.split('body=[')[1]
+    labRange = labRange.split(']')[0]
+    labRange = labRange.split(' ')[1]
+		
+    //removal of times and bolding of values
+    if (RawText.indexOf('</b>')>=0){
+      //---Splitting so get correct access to text area
+      var PreP = RawText.split('<p')[0] + '<p'
+      var innerP = RawText.split('<p')[1].split('p>')[0] 
+      var PostP = 'p>' +  RawText.split('p>')[1]
+      
+      PreP = PreP + innerP.substring(0,innerP.indexOf('>')) + '>'
+      innerP = innerP.substring(innerP.indexOf('>')+1,innerP.indexOf('</'))
+      PostP =  '</' + PostP
+      innerP = innerP.substring(0,innerP.lastIndexOf(' '))
+      //end---Splitting so get correct access to text area
+      
+      var lineBreakIndex = innerP.lastIndexOf('&nbsp;')
+      innerP = '<b>' + innerP.substring(0,lineBreakIndex) + '</b>' + '  <i>(' + labRange + ')</i><br>'  + innerP.substring(lineBreakIndex) 
+      LabDateRawArr[i].innerHTML =PreP + innerP + PostP
+      
+      
+  	}else{ // for the non-first column suff
+      //---Splitting so get correct access to text area
+      var ReplaceText = RawText
+      ReplaceText = ReplaceText.trim()
+      ReplaceText = ReplaceText.substring(0,ReplaceText.lastIndexOf(' '))
+      //end---Splitting so get correct access to text area
+      
+      var lineBreakIndex = ReplaceText.lastIndexOf(' ')
+      ReplaceText = '<b>' + ReplaceText.substring(0,lineBreakIndex) + '</b>' + '  <i>(' + labRange + ')</i><br>'  + ReplaceText.substring(lineBreakIndex)   
+      LabDateRawArr[i].innerHTML =ReplaceText
+    }
     
-    var PreText = RawHTML.split('>')[0] + '>'
-    var PostText = '</' + RawHTML.split('</')[1]
-    labBoxArr[i].innerHTML = PreText + LabName + PostText
-  }
-}
+    
 
+  }
+  
+  //console.log(topDates)
+  
+  setTimeout(function(){ colorDates() },250);
+}
 
 
 
@@ -440,76 +529,71 @@ function colorDates(date,divVar){
     }
       
   }
-  
+  SortArea()
 }
 
-//wait for all labs data to be loaded before modifying and putting colors around it. 
-function waitLabLoad(){
-  //console.log("waiting load")
-	var tableDiv = $('#cumulativeLab')[0]
-  var tableChildren = tableDiv.children
-  //console.log(tableChildren)
-  var failed = 0
+//----Sorts visible labs on page to newest on top. 
+function SortArea(){
+  console.log('sortingbyDate')
+  var marginObj
   
-  for (i=0; i<tableChildren.length; i++){
-    if (tableChildren[i].innerHTML.indexOf('pinwheel')>=0){
-     		 failed = 1
+  var copyVisibleLabArr = new Array()
+  
+  for (i=0; i<visibleLabValueArr.length; i++){
+    var divId = visibleLabValueArr[i][0]
+    var eledate = visibleLabValueArr[i][1]
+    var objDiv = document.getElementById(divId)
+    //var Pusharr = 
+    if(objDiv.previousElementSibling.id.indexOf('headP')>=0){
+     	 copyVisibleLabArr.push([objDiv,eledate])
     }
     
   }
-  if (failed == 1){
-    		setTimeout(function(){ waitLabLoad() }, 500);
-  }else{
-  	//console.log('finished waiting load labs')
-    expandLabName()
-    getDate()
-    labTextMod() 
-    //getDate()
-  }
-}
+	
+	var cumTable = $('#cumulativeLab')[0]
+  //console.log(cumTable)
+  //console.log(copyVisibleLabArr)
 
-//modifies the innerHTML of the lab values. Currently removes the Hour and bolds Lab Value
-function labTextMod(){ 
-  
-  var LabDateRawArr = $('div[id*=preventionProcedure]')
-  for (i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
-  	var RawText = LabDateRawArr[i].innerHTML
-		var DateHolder = '' 
-		
-    //removal of times and bolding of values
-    if (RawText.indexOf('</b>')>=0){
-      //console.log('nextline')
-      var PreP = RawText.split('<p')[0] + '<p'
-      var innerP = RawText.split('<p')[1].split('p>')[0] 
-      var PostP = 'p>' +  RawText.split('p>')[1]
+  for (j=0; j<topDates.length; j++){ 
+    for (i=0; i<copyVisibleLabArr.length; i++){
+      var eledate = copyVisibleLabArr[i][1]
+      var objDiv = copyVisibleLabArr[i][0]
+      var objDivParent = objDiv.parentElement
+      var topDateVal = topDates[j]
+			
+      //console.log(topDateVal.getTime() == eledate.getTime())
       
+      if (topDateVal.getTime() == eledate.getTime()){
+        copyVisibleLabArr.splice(i,1) 
+        marginObj = objDivParent
+        cumTable.appendChild(objDivParent)   
+        i--
+      }
+        
       
-      PreP = PreP + innerP.substring(0,innerP.indexOf('>')) + '>'
-      innerP = innerP.substring(innerP.indexOf('>')+1,innerP.indexOf('</'))
-      PostP =  '</' + PostP
-      innerP = innerP.substring(0,innerP.lastIndexOf(' '))
-      
-      var lineBreakIndex = innerP.lastIndexOf('&nbsp;')
-      innerP = '<b>' + innerP.substring(0,lineBreakIndex) + '</b> <br>' + innerP.substring(lineBreakIndex) 
-      LabDateRawArr[i].innerHTML =PreP + innerP + PostP
-      
-  	}else{ // for the non-first column suff
-      var ReplaceText = RawText
-      ReplaceText = ReplaceText.trim()
-      ReplaceText = ReplaceText.substring(0,ReplaceText.lastIndexOf(' ')) 
-      var lineBreakIndex = ReplaceText.lastIndexOf(' ')
-      ReplaceText = '<b>' + ReplaceText.substring(0,lineBreakIndex) + '</b> <br>' + ReplaceText.substring(lineBreakIndex)   
-      LabDateRawArr[i].innerHTML =ReplaceText
     }
-    
-    
-
   }
+  //makes a gap after the last colored box
+  marginObj.style.marginBottom = '30px'
   
-  //console.log(topDates)
-  
-  setTimeout(function(){ colorDates() },250);
+  //console.log(copyVisibleLabArr)
+  for (j=0; j<copyVisibleLabArr.length; j++){
+    var objDiv = copyVisibleLabArr[j][0]
+    var objDivParent = objDiv.parentElement
+    copyVisibleLabArr.splice(j,1) 
+    cumTable.appendChild(objDivParent) 
+    j--
+    
+  }
 }
+
+
+//--------------------------------------------------------
+//--------------------------------------------------------
+//-----------------Random Functions-----------------------
+//--------------------------------------------------------
+//--------------------------------------------------------
+
 
 function replaceHeadClass(){
   var LabHeaders = $('div[id*=headPrevention0][class*=headPrevention]')
@@ -717,14 +801,14 @@ function AllFunc() {
   LoadMatchedArr(myLabArray)
   //setTimeout(function(){ replaceHeadClass() }, 2000);
   setTimeout(function(){ waitLabLoad() }, 1000);
-
  
 }
 function ByDate() {
-  EraseArea()
+  console.log("bydateButton")
+  SortArea()
+  //EraseArea()
   //LoadMatchedArr(myLabArray)
-  setTimeout(function(){ waitLabLoad() }, 1000);
-  
+  //setTimeout(function(){ waitLabLoad() }, 1000);
 }
 
 
