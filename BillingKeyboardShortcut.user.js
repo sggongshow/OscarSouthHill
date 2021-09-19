@@ -8,6 +8,7 @@
 // @include     *billingDigNewSearch.jsp?*
 // @include     */oscar/CaseManagementEntry.do*
 // @include     *SaveBilling.do?
+// @include     *formwcb.do?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @version 15.2
 // ==/UserScript==
