@@ -75,14 +75,14 @@ function showAlert2()
 }
 var input3 = document.createElement('input');
 input3.type = 'button';
-input3.value = 'LabGrid';
+input3.value = 'Blank';
 input3.onclick = showAlert3;
 input3.setAttribute('style', 'width:60px;font-size:16px;z-index:1;position:fixed;bottom:120px;right:0px; background-color: #ffff00;');
 document.body.appendChild(input3);
 function showAlert3()
 {
   //$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
-  var formPath = vPath + '/lab/CumulativeLabValues.jsp?demographic_no=' + demo_no
+  //var formPath = vPath + '/lab/CumulativeLabValues3.jsp?demographic_no=' + demo_no
   window.open(formPath,'Popup_Window1', 'width=800,height=800,left =0,top = 0')
 }
 var input4 = document.createElement('input');
@@ -275,7 +275,7 @@ document.body.appendChild(input12);
 function showAlert12() //{window.open(vPath  + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Allergy Shots 0')}
 {
   //https://secure10.oscarhost.ca/SDHurwitzInc/eform/efmformadd_data.jsp?fid=68&demographic_no=640&appointment=
-  var formPath = vPath + '/lab/CumulativeLabValues3.jsp?demographic_no=' + demo_no
+  var formPath = vPath + '/lab/CumulativeLabValues.jsp?demographic_no=' + demo_no
   window.open(formPath,'Popup_Window6', 'width=800,height=800,left =0,top = 0')
 }
 var input13 = document.createElement('input');
