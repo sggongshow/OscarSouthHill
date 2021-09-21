@@ -50,6 +50,10 @@ document.addEventListener('keydown', function(theEvent) {
  			$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
       
+    case theAltKey && theKey==='a': //Show med list
+      document.getElementById("saveImg").click()
+      break;
+      
 		case theAltKey && theKey==='w': //Repeat Meds (Meds+)
  			$('#Rx > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
