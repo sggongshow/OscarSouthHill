@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           EChart_KeyboardShortcuts
-// @namespace      GongOscar
+// @namespace      Gong Oscar
 // @version 15.2
 // @description Various Echart shortcut buttons (Alt+ e,v,z,x,k,s,0,1,2,3,4,5,7). Set your own Measurement groupName and default population text.
 // @include        */casemgmt/forward.jsp?action=view&demographic*
@@ -93,8 +93,10 @@ document.addEventListener('keydown', function(theEvent) {
 			break;
       */
       
-     	case theAltKey && theKey==='1': //Preventions
-      	$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+     	case theAltKey && theKey==='1': //Preventions or Save button
+      	//---- Preventions tab
+      	//$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      	document.getElementById("saveImg").click()
       	break
       
      	case theAltKey && theKey==='2': // new Tickler
