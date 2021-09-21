@@ -315,7 +315,8 @@ if (params.demographicNo) {
 
 //getDate()
 //window.addLabToProfile2
-radioBtn5.click()
+setTimeout(function(){radioBtn5.click() }, 300)
+
 
 //console.log(myLabArray)
 //-------------------------------------------------------------------
@@ -787,11 +788,17 @@ function CbcFunc() {
 function InfFunc() {
   EraseArea()
   console.log("InfFunc")
+  var LabIDArray = getCol(myLabArray,2)
+	var MatchedArr = arrayMatch(INFArray,LabIDArray)
+  LoadMatchedArr(MatchedArr)
   setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function HepFunc() {
   EraseArea()
   console.log("HepFunc")
+  var LabIDArray = getCol(myLabArray,2)
+	var MatchedArr = arrayMatch(HEPArray,LabIDArray)
+  LoadMatchedArr(MatchedArr)
   setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function AllFunc() {
