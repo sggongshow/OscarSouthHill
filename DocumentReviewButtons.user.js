@@ -65,12 +65,12 @@ document.addEventListener('keydown', function(theEvent) {
     case theAltKey && theKey==='w': //fwd page
       
       var button = $('[id*="nextP"]')[0]
-      console.log(button)
+      //console.log(button)
 			//check if button is visible	
 			var visible = true
       
      	var styleVal = button.getAttribute("style")
-      console.log(styleVal)
+      //console.log(styleVal)
       if (styleVal != null){
       	if (styleVal.includes("inline") == false ){
         visible = false
@@ -78,7 +78,7 @@ document.addEventListener('keydown', function(theEvent) {
         visible = true
         }
       }
-      console.log(visible)
+      //console.log(visible)
       //if visible and on correct page then click
   		if ((window.location.pathname.includes("DocDisplay.jsp")||window.location.pathname.includes("showDocument.jsp") ) && visible == true ){
   			button.click()
@@ -172,7 +172,7 @@ function showAlert()
 {
   //Covering the dumb various codings of the acknowledge button
   
-	console.log('clicked acknow')
+	//console.log('clicked acknow')
     
   //weird lab/transcriptions page
   if (window.location.pathname.includes("labDisplay.jsp")){ 
@@ -195,9 +195,9 @@ function showAlert()
 
   }else{//Edoc page
     var OGLabelObj = $('input[id*=docDesc][name*=documentDes]')[0]
-    console.log('transfer text')
-    console.log(OGLabelObj.value)
-    console.log(inputTextbox.value)
+    //console.log('transfer text')
+    //console.log(OGLabelObj.value)
+    //console.log(inputTextbox.value)
 		OGLabelObj.value =	inputTextbox.value
     var saveButton = $('input[type="submit"][name="save"][id*="save"]')
     saveButton.click()
@@ -212,13 +212,13 @@ function showAlert()
   if (button == null){
   button = $('input[type="submit"][value="Acknowledge"]')[0]
   }
-  console.log(button)
+  //console.log(button)
   // if no ack, close button instead
   if (button == null){
     button = $('input[type="button"][value*="Close"]')
   }
      
-  console.log(button)
+  //console.log(button)
   var parentId = $(button).closest('form').attr('id');
   if (parentId.includes('acknowledge')){
   	button.click()
@@ -290,13 +290,13 @@ if (window.location.pathname.includes("labDisplay.jsp")){
     var splitName = fullName.split(' ')
 		var lastName = splitName[splitName.length -1]
 		var firstName = splitName[0]
-		console.log(lastName)
-  	console.log(firstName)
+		//console.log(lastName)
+  	//console.log(firstName)
     NameSearchWin = window.open("https://www.cpsbc.ca/public/registrant-directory/search-result"); 
 		NameSearchWinDoc = NameSearchWin.document;
     
-    console.log(NameSearchWin)
-    console.log(NameSearchWinDoc)
+    //console.log(NameSearchWin)
+    //console.log(NameSearchWinDoc)
      }
 
 }
