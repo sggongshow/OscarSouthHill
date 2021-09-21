@@ -12,14 +12,17 @@
 
  ///FOR TICKLER KEYBOARD SHORTCUT TO BE ENABLED
 
+window.addEventListener('load', function () {
 
-
+//window.confirm= function(){ return true;}
+//window.alert= function(){ return true;}
 
 document.addEventListener('keydown', function(theEvent) {
 	var theKey = theEvent.key
 	var theAltKey =theEvent.altKey;
 	var theCtrlKey = theEvent.ctrlKey;
 	var theShiftKey= theEvent.shiftKey;
+  closeButton = $('input[type="button"][value*="Close"]')
 
 	switch(true){
       //Acknowledge  button
@@ -109,34 +112,47 @@ document.addEventListener('keydown', function(theEvent) {
 	}
 }, true);
 
+
+  
 //New input box that follows the page
 var inputTextbox = document.createElement('input');
 inputTextbox.type = 'text';
 inputTextbox.id = 'newTextBoxInput'
 inputTextbox.name = 'newTextBoxInput'
 
-
-//get original text field value
-var OGLabelObj = $('span[id*=labelspan][class=Field2]')
-var OGLabelText = OGLabelObj.text()
-//console.log(OGLabelText.length)
-//console.log(OGLabelText.includes("("))
-if (OGLabelText.includes("(") == false){
-   //console.log(OGLabelText.includes("test"))
-	OGLabelText = OGLabelText.split(":")[1]
-  //console.log(OGLabelText)
-  OGLabelText = OGLabelText.substring(1)
-   //console.log(OGLabelText)
-}else{
-  OGLabelText=""
-}
-
-inputTextbox.value = OGLabelText
-  
+//--- Input box that follows page but for labs page
 if (window.location.pathname.includes("labDisplay.jsp")){
+  //get original text field value
+  var OGLabelObj = $('span[id*=labelspan][class=Field2]')
+  var OGLabelText = OGLabelObj.text()
+  //console.log(OGLabelText.length)
+  //console.log(OGLabelText.includes("("))
+  if (OGLabelText.includes("(") == false){
+     //console.log(OGLabelText.includes("test"))
+    OGLabelText = OGLabelText.split(":")[1]
+    //console.log(OGLabelText)
+    OGLabelText = OGLabelText.substring(1)
+     //console.log(OGLabelText)
+  }else{
+    OGLabelText=""
+  }
+
+  inputTextbox.value = OGLabelText
+
+
 	inputTextbox.setAttribute('style', 'width:120px;font-size:12px;padding:0px;position:fixed;top:20px;left:518px; border-color:red;');
 	document.body.appendChild(inputTextbox);
+}else{
+  var OGLabelObj = $('input[id*=docDesc][name*=documentDes]')[0]
+  var OGLabelText = OGLabelObj.value
+  
+  inputTextbox.value = OGLabelText
+  inputTextbox.setAttribute('style', 'width:120px;font-size:12px;padding:0px;position:fixed;top:120px;right:10px; border-color:red;');
+	document.body.appendChild(inputTextbox);
+  
 }
+
+
 
 
 //ACKNOWLEDGE BUTTON
@@ -156,7 +172,7 @@ function showAlert()
 {
   //Covering the dumb various codings of the acknowledge button
   
-	
+	console.log('clicked acknow')
     
   //weird lab/transcriptions page
   if (window.location.pathname.includes("labDisplay.jsp")){ 
@@ -178,10 +194,16 @@ function showAlert()
     }
 
   }else{//Edoc page
+    var OGLabelObj = $('input[id*=docDesc][name*=documentDes]')[0]
+    console.log('transfer text')
+    console.log(OGLabelObj.value)
+    console.log(inputTextbox.value)
+		OGLabelObj.value =	inputTextbox.value
     var saveButton = $('input[type="submit"][name="save"][id*="save"]')
     saveButton.click()
-  }
-  console.log("test")
+    
+  	}
+  
   //click acknowledge button or close if no acknowledge button  	
   var button
   //if (window.location.pathname.includes("labDisplay.jsp")){
@@ -200,6 +222,7 @@ function showAlert()
   var parentId = $(button).closest('form').attr('id');
   if (parentId.includes('acknowledge')){
   	button.click()
+    //closeButton.click()
   }
 } 
 
@@ -279,7 +302,7 @@ if (window.location.pathname.includes("labDisplay.jsp")){
 }
 
 
-
+})
 
 
 
