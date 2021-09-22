@@ -299,7 +299,7 @@ updateBtn.value = 'Update Groups';
 updateBtn.onclick = EraseArea
 updateBtn.setAttribute('style', 'font-size:12px;position:absolute;top:10px;right:200px;background-color: lime;');
 //input6.setAttribute('type', 'hidden');
-document.body.appendChild(updateBtn);
+//document.body.appendChild(updateBtn);
 
 
 //------Extend horizontally so now lab value wrapping
@@ -381,8 +381,8 @@ function waitLabLoad(){
 //----- Removes the ones with no lab values
 function expandLabName(){
 	var labBoxArr = $('a[id*=ahead][id*=.]')
-  //console.log(labBoxArr)
-	for (i=0; i<labBoxArr.length; i++){//labBoxArr.length
+  //console.log('expand lab names')
+	for (var i=0; i<labBoxArr.length; i++){//labBoxArr.length
     var RawHTML = labBoxArr[i].innerHTML
     var LabName = labBoxArr[i].title.split('header')[1]
     LabName = LabName.split(']')[0]
@@ -415,7 +415,7 @@ function getDate(){
   //console.log('getdate')
   var LabDateRawArr = $('div[id*=preventionProcedure]')
 	
-  for (i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
+  for (var i=0; i<LabDateRawArr.length; i++){ //LabDateRawArr.length
     var id = LabDateRawArr[i].id
   	var RawText = LabDateRawArr[i].innerText
 		RawText = RawText.substring(0, RawText.lastIndexOf(' '))
@@ -437,22 +437,26 @@ function getDate(){
     }
   }
 
-
+	//console.log(topDates)
   
 }
 
 //modifies the innerHTML of the lab values. Currently removes the Hour and bolds Lab Value
 function labTextMod(){ 
-  
+  //console.log('modify lab text details')
+
+
   var LabDateRawArr = $('div[id*=preventionProcedure]')
-  for (i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
+  console.log(LabDateRawArr.length)
+  for (var i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
   	var RawText = LabDateRawArr[i].innerHTML
     var labRange = LabDateRawArr[i].title.split('body=[')[1]
     labRange = labRange.split(']')[0]
     labRange = labRange.split(' ')[1]
-		
+		console.log(RawText)
     //removal of times and bolding of values
     if (RawText.indexOf('</b>')>=0){
+      //console.log('firstcol')
       //---Splitting so get correct access to text area
       var PreP = RawText.split('<p')[0] + '<p'
       var innerP = RawText.split('<p')[1].split('p>')[0] 
@@ -471,6 +475,7 @@ function labTextMod(){
       
   	}else{ // for the non-first column suff
       //---Splitting so get correct access to text area
+      console.log('not-firstcol')
       var ReplaceText = RawText
       ReplaceText = ReplaceText.trim()
       ReplaceText = ReplaceText.substring(0,ReplaceText.lastIndexOf(' '))
@@ -481,7 +486,7 @@ function labTextMod(){
       LabDateRawArr[i].innerHTML =ReplaceText
     }
     
-    
+    //console.log(LabDateRawArr[i].innerHTML)
 
   }
   
@@ -490,10 +495,29 @@ function labTextMod(){
   setTimeout(function(){ colorDates() },250);
 }
 
+function checkDoneLabTextMod(){
+  var fail = 0
+  for (i=0; i< LabDateRawArr.length; i++){
+    var RawText = LabDateRawArr[i].innerHTML
+    if (RawText.indexOf('</b>') <0){
+      fail = 1
+      break
+    }  
+  }
+  
+  if (fail == 0){
+  	setTimeout(function(){ colorDates() },250);
+  }else{
+    console.log('failed check')
+    labTextMod()
+  }
+}
 
 
 //color the borders of the dates based on how old they are
 function colorDates(date,divVar){
+    console.log('color dates')
+
   var colorArr = [
     '2px solid #00ff00', 
     '2px solid #00ffff', 
@@ -533,12 +557,12 @@ function colorDates(date,divVar){
 
 //----Sorts visible labs on page to newest on top. 
 function SortArea(){
-  //console.log('sortingbyDate')
+  console.log('sortingbyDate')
   var marginObj
   
   var copyVisibleLabArr = new Array()
   
-  for (i=0; i<visibleLabValueArr.length; i++){
+  for (var i=0; i<visibleLabValueArr.length; i++){
     var divId = visibleLabValueArr[i][0]
     var eledate = visibleLabValueArr[i][1]
     var objDiv = document.getElementById(divId)
@@ -553,8 +577,8 @@ function SortArea(){
   //console.log(cumTable)
   //console.log(copyVisibleLabArr)
 
-  for (j=0; j<topDates.length; j++){ 
-    for (i=0; i<copyVisibleLabArr.length; i++){
+  for (var j=0; j<topDates.length; j++){ 
+    for (var i=0; i<copyVisibleLabArr.length; i++){
       var eledate = copyVisibleLabArr[i][1]
       var objDiv = copyVisibleLabArr[i][0]
       var objDivParent = objDiv.parentElement
@@ -576,7 +600,7 @@ function SortArea(){
   marginObj.style.marginBottom = '30px'
   
   //console.log(copyVisibleLabArr)
-  for (j=0; j<copyVisibleLabArr.length; j++){
+  for (var j=0; j<copyVisibleLabArr.length; j++){
     var objDiv = copyVisibleLabArr[j][0]
     var objDivParent = objDiv.parentElement
     copyVisibleLabArr.splice(j,1) 
@@ -597,7 +621,7 @@ function SortArea(){
 function replaceHeadClass(){
   var LabHeaders = $('div[id*=headPrevention0][class*=headPrevention]')
   //console.log(LabHeaders)
-  for (i=0; i<LabHeaders.length; i++){
+  for (var i=0; i<LabHeaders.length; i++){
     	LabHeaders[i].className= 'headPrevention'
     	//console.log(LabHeaders[i].class)
   }
@@ -802,6 +826,7 @@ function HepFunc() {
   setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function AllFunc() {
+  console.log('show all labs')
   EraseArea()
   LoadMatchedArr(myLabArray)
   //setTimeout(function(){ replaceHeadClass() }, 2000);
