@@ -457,7 +457,9 @@ function main(){
   var year = todayArr[3]
   var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
   
-  newestNote.value = newDateString
+  if (noteExtra.length < 20){
+	  newestNote.value = newDateString
+  }
   //console.log('Date modified')
   //console.log(newDateString)
   //console.log(newestNote)
