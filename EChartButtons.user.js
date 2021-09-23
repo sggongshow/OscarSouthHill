@@ -444,8 +444,9 @@ function main(){
   var noteText = newestNote.value
   var noteDate =  noteText.split(':')[0]
   var noteExtra = " " + noteText.split(':')[1]
+  var alreadyWriting = noteText.substring(noteText.indexOf(']'))
   
- // console.log(noteText)
+  //console.log(noteText)
   //console.log(noteDate)
   //console.log(noteExtra)
   
@@ -457,7 +458,8 @@ function main(){
   var year = todayArr[3]
   var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
   
-  if (noteExtra.length < 20){
+  if (alreadyWriting.length < 20){
+    console.log("Note is considered blank")
 	  newestNote.value = newDateString
   }
   //console.log('Date modified')
