@@ -142,13 +142,15 @@ if (window.location.pathname.includes("labDisplay.jsp")){
 
 	inputTextbox.setAttribute('style', 'width:120px;font-size:12px;padding:0px;position:fixed;top:20px;left:518px; border-color:red;');
 	document.body.appendChild(inputTextbox);
+  inputTextbox.focus()
 }else{
   var OGLabelObj = $('input[id*=docDesc][name*=documentDes]')[0]
   var OGLabelText = OGLabelObj.value
   
   inputTextbox.value = OGLabelText
-  inputTextbox.setAttribute('style', 'width:120px;font-size:12px;padding:0px;position:fixed;top:120px;right:10px; border-color:red;');
+  inputTextbox.setAttribute('style', 'height:25px ;width:160px;font-size:14px;padding:0px;position:fixed;top:120px;right:10px; border-color:red;');
 	document.body.appendChild(inputTextbox);
+  inputTextbox.focus()
   
 }
 
@@ -198,7 +200,10 @@ function showAlert()
     //console.log('transfer text')
     //console.log(OGLabelObj.value)
     //console.log(inputTextbox.value)
-		OGLabelObj.value =	inputTextbox.value
+    if (OGLabelObj.value.length < inputTextbox.value.length){
+			OGLabelObj.value =	inputTextbox.value	
+    }
+    
     var saveButton = $('input[type="submit"][name="save"][id*="save"]')
     saveButton.click()
     
