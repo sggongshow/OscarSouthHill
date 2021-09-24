@@ -50,9 +50,6 @@ document.addEventListener('keydown', function(theEvent) {
  			$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
 			break;
       
-    case theAltKey && theKey==='a': //Show med list
-      document.getElementById("saveImg").click()
-      break;
       
 		case theAltKey && theKey==='w': //Repeat Meds (Meds+)
  			$('#Rx > div:nth-child(2) > h3:nth-child(1) > a:nth-child(1)').click()
@@ -99,8 +96,8 @@ document.addEventListener('keydown', function(theEvent) {
       
      	case theAltKey && theKey==='1': //Preventions or Save button
       	//---- Preventions tab
-      	//$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
-      	document.getElementById("saveImg").click()
+      	$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      	//document.getElementById("saveImg").click()
       	break
       
      	case theAltKey && theKey==='2': // new Tickler
