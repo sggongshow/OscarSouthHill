@@ -443,12 +443,12 @@ function main(){
   //console.log(newestNote)
   var noteText = newestNote.value
   var noteDate =  noteText.split(':')[0]
-  var noteExtra = " " + noteText.split(':')[1]
+  var noteExtra = " " + noteText.substring(noteText.indexOf(':')+1)
   var alreadyWriting = noteText.substring(noteText.indexOf(']'))
-  
+ 
   //console.log(noteText)
   //console.log(noteDate)
-  //console.log(noteExtra)
+  console.log(noteExtra)
   
   
   var today = new Date().toString()
