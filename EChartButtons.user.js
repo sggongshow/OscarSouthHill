@@ -448,7 +448,7 @@ function main(){
  
   //console.log(noteText)
   //console.log(noteDate)
-  console.log(noteExtra)
+  //console.log(noteExtra)
   
   
   var today = new Date().toString()
