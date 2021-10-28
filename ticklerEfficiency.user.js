@@ -28,7 +28,7 @@ window.addEventListener('load', function() {
   HiBut.type = 'button';
   HiBut.id = 'HiButton'
   HiBut.name = 'HiButton'
-  HiBut.value = 'High'
+  HiBut.value = 'Urgent'
   HiBut.onclick = HiButtonFunc
   HiBut.setAttribute('style', 'width:80px;font-size:12px;padding:0px;position:fixed;top:80px;right:10; border-color:red;');
 	document.body.appendChild(HiBut);
@@ -75,6 +75,8 @@ function meButtonFunc(){
   taskAssign.value = myIDNum
 }
 function HiButtonFunc(){
-  var priorityAssign = $('select[name=priority]')[0]
-  priorityAssign.value = 'High'
+  //var priorityAssign = $('select[name=priority]')[0]
+  //priorityAssign.value = 'High'
+  var taskAssign = $('select[name=task_assigned_to]')[0]
+  taskAssign.value = 40
 }
