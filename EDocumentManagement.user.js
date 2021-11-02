@@ -72,7 +72,7 @@ input3.setAttribute('style', 'width:60px;height:20px;font-size:14px;z-index:1;po
 document.body.appendChild(input3);
 function showAlert3()
 {
-  window.location = (newURL + "radiology");
+  window.location = (newURL + "Imaging report");
 }
 
 
