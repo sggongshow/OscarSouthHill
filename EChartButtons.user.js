@@ -33,6 +33,15 @@ var myWindow = ''
 var elements = (window.location.pathname.split('/', 2))
 firstElement = (elements.slice(1)) //alert(firstElement)
 vPath = ('https://' + location.host + '/' + firstElement + '//') 
+//console.log(elements)
+
+var splitApptNum = window.location.toString().split("appointmentNo")[1]
+var ApptNum = splitApptNum.split("=")[1].split("&")[0]
+if (ApptNum.length<1){
+	ApptNum = 0
+}
+  
+console.log(ApptNum)
 
 
 //alert(vPath)
@@ -82,7 +91,7 @@ document.body.appendChild(input3);
 function showAlert3()
 {
   //$('#Rx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
-  //var formPath = vPath + '/lab/CumulativeLabValues3.jsp?demographic_no=' + demo_no
+  //var formPath = vPath + '/lab/CumulativeLabValues3.jsp?demographic_no=' + demo_no + '&appointment=' + ApptNum
   window.open(formPath,'Popup_Window1', 'width=800,height=800,left =0,top = 0')
 }
 var input4 = document.createElement('input');
@@ -165,7 +174,7 @@ function showAlert8()
   var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=923&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=923&demographic_no=' + demo_no + '&appointment=' + ApptNum// INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
   window.open(formPath,'Popup_Window4', 'width=800,height=800,left = 0,top = 0')
 }
@@ -180,7 +189,7 @@ function showAlert9()
   var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1060&demographic_no=' + demo_no // INSERT YOU OWN form ID (fid=??) here
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1060&demographic_no=' + demo_no + '&appointment=' + ApptNum// INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
   window.open(formPath,'Popup_Window5', 'width=800,height=800,left = 0,top = 0')
 }
@@ -274,8 +283,8 @@ input12.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixe
 document.body.appendChild(input12);
 function showAlert12() //{window.open(vPath  + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Allergy Shots 0')}
 {
-  //https://secure10.oscarhost.ca/SDHurwitzInc/eform/efmformadd_data.jsp?fid=68&demographic_no=640&appointment=
-  var formPath = vPath + '/lab/CumulativeLabValues.jsp?demographic_no=' + demo_no
+  //https://secure10.oscarhost.ca/SDHurwitzInc/eform/efmformadd_data.jsp?fid=68&demographic_no=640&&appointment=
+  var formPath = vPath + '/lab/CumulativeLabValues.jsp?demographic_no=' + demo_no + '&appointment=' + ApptNum
   window.open(formPath,'Popup_Window6', 'width=800,height=800,left =0,top = 0')
 }
 var input13 = document.createElement('input');
@@ -290,7 +299,7 @@ function showAlert13()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=775&demographic_no=' + demo_no //alert(formPath)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=775&demographic_no=' + demo_no + '&appointment=' + ApptNum//alert(formPath)
   window.open(formPath, 'Popup_Window7', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
 var input14 = document.createElement('input');
@@ -305,7 +314,7 @@ function showAlert14()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1130&demographic_no=' + demo_no //var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1130&demographic_no=' + demo_no + '&appointment=' + ApptNum//var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
   //alert(formPath)
   window.open(formPath, 'Popup_Window8', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
@@ -321,7 +330,7 @@ function showAlert15()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1161&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1161&demographic_no=' + demo_no + '&parentAjaxId=eforms' + '&appointment=' + ApptNum//alert(formPath)
   window.open(formPath, 'Popup_Window9', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
 
@@ -337,7 +346,7 @@ function showAlert16()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=968&demographic_no=' + demo_no + '&parentAjaxId=eforms' //window.open(formPath)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=968&demographic_no=' + demo_no + '&parentAjaxId=eforms' + '&appointment=' + ApptNum//window.open(formPath)
   window.open(formPath, 'Popup_Window10', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
 
@@ -353,7 +362,7 @@ function showAlert55()
   var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=251&demographic_no=' + demo_no + '&parentAjaxId=eforms' //alert(formPath)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=251&demographic_no=' + demo_no + '&parentAjaxId=eforms' + '&appointment=' + ApptNum//alert(formPath)
   window.open(formPath, 'Popup_Window11', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
 
@@ -370,7 +379,7 @@ function showAlert50()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=936&demographic_no=' + demo_no //window.open(formPath)
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=936&demographic_no=' + demo_no + '&appointment=' + ApptNum//window.open(formPath)
   window.open(formPath, 'Popup_Window12', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
 
