@@ -552,7 +552,7 @@ function colorDates(date,divVar){
     }
       
   }
-  //SortArea()
+  SortArea()
 }
 
 //----Sorts visible labs on page to newest on top. 
