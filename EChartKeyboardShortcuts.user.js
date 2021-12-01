@@ -72,6 +72,11 @@ document.addEventListener('keydown', function(theEvent) {
   		$('#imglabs5').click()
   		$('#imgpreventions5').click()
 			break;
+      
+    case theAltKey && theKey==='f': //Medical Hx
+ 			$('a[href="#"][onclick*="showIssueHistory"][onclick*="61\')"]')[0].click()
+			break;
+       
       /*
     case theAltKey && theKey==='1': //Imaging
  			var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
@@ -121,9 +126,10 @@ document.addEventListener('keydown', function(theEvent) {
 				 $('#docs > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
       	break
       
-       case theAltKey && theKey==='4': //Diease
+      case theAltKey && theKey==='4': //Diease
      		 $('#Dx > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
       	break
+      
       
   		default:
       break;
