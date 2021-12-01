@@ -189,7 +189,7 @@ function showAlert9()
   var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=977&demographic_no=' + demo_no + '&appointment=' + ApptNum// INSERT YOU OWN form ID (fid=??) here
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1060&demographic_no=' + demo_no + '&appointment=' + ApptNum// INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
   window.open(formPath,'Popup_Window5', 'width=800,height=800,left = 0,top = 0')
 }
@@ -433,7 +433,7 @@ input180.type = 'button';
 input180.value = 'DM flow sheet';
 input180.onclick = showAlert180;
 input180.setAttribute('style', 'font-size:16px;z-index:1;position:fixed;bottom: 300px;right:0px');
-//document.body.appendChild(input180);
+document.body.appendChild(input180);
 function showAlert180()
 {
   window.open(vPath + 'oscarEncounter/oscarMeasurements/TemplateFlowSheet.jsp?demographic_no='+demo_no+'&template=diab2')
@@ -467,7 +467,7 @@ function main(){
   var year = todayArr[3]
   var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
   
-  if (alreadyWriting.length < 20){
+  if (alreadyWriting.length < 50){
     console.log("Note is considered blank")
 	  newestNote.value = newDateString
   }
