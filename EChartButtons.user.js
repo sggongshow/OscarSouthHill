@@ -143,9 +143,6 @@ function showAlert7() // INSERT YOU OWN MEASUREMENT groupName=?????  below
 {
   window.open(vPath + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Screening%20Procedures', 'Screening%20ProceduresWindow', 'width=1000,height=700')
 }
-
-
-
 var input7 = document.createElement('input');
 input7.type = 'button';
 input7.value = 'Unused2';
@@ -189,7 +186,7 @@ function showAlert9()
   var myParam = location.search.split('demographicNo=') [1] //alert(myParam)
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1060&demographic_no=' + demo_no + '&appointment=' + ApptNum// INSERT YOU OWN form ID (fid=??) here
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=977&demographic_no=' + demo_no + '&appointment=' + ApptNum// INSERT YOU OWN form ID (fid=??) here
   //alert(formPath)
   window.open(formPath,'Popup_Window5', 'width=800,height=800,left = 0,top = 0')
 }
@@ -255,7 +252,6 @@ function showAlert10() // INSERT YOU OWN MEASUREMENT groupName=?????  below
   //window.open(vPath + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Allergy Shots')
   $('#menu3 > a:nth-child(10)').click()
 }
-
 */
 var input11 = document.createElement('input');
 input11.type = 'button';
@@ -394,8 +390,6 @@ function showAlert17()
 {
   $('#menu1 > a:nth-child(6)').click()
 }
-
-
 var input18 = document.createElement('input');
 input18.type = 'button';
 input18.value = 'Trip
@@ -425,7 +419,6 @@ function showAlert19()
   $('#menu3 > a:nth-child(4)').click()
  // $('#menu3 > a:nth-child(6)').click()
   //myWindow = window.open(formPath) 
-
 }
 */
 var input180 = document.createElement('input');
@@ -433,7 +426,7 @@ input180.type = 'button';
 input180.value = 'DM flow sheet';
 input180.onclick = showAlert180;
 input180.setAttribute('style', 'font-size:16px;z-index:1;position:fixed;bottom: 300px;right:0px');
-document.body.appendChild(input180);
+//document.body.appendChild(input180);
 function showAlert180()
 {
   window.open(vPath + 'oscarEncounter/oscarMeasurements/TemplateFlowSheet.jsp?demographic_no='+demo_no+'&template=diab2')
@@ -503,11 +496,6 @@ window.addEventListener('load', function() {
 
 
 }, false);
-
-
-
-
-
 
 
 
