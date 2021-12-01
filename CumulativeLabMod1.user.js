@@ -352,6 +352,16 @@ function sortDate(arrayDate){
   //return arrayDate
 }
 
+//---------------
+//toggle visibility of the table. When visible interactions while running the modification
+//codes stops the code
+function toggleTableVis(){
+  
+  var labGrid = $('#cumulativeLab')[0]
+  //console.log("toggle" + labGrid.hidden + " to " + !labGrid.hidden)
+ 	labGrid.hidden = !labGrid.hidden
+}
+//---------------
 //wait for all labs data to be loaded before modifying and putting colors around it. 
 function waitLabLoad(){
   //console.log("waiting load")
@@ -359,6 +369,7 @@ function waitLabLoad(){
   var tableChildren = tableDiv.children
   //console.log(tableChildren)
   var failed = 0
+  
   
   for (i=0; i<tableChildren.length; i++){
     if (tableChildren[i].innerHTML.indexOf('pinwheel')>=0){
@@ -371,7 +382,9 @@ function waitLabLoad(){
   }else{
   	//console.log('finished waiting load labs')
     expandLabName()
+    //console.log("after expand")
   	getDate()
+    //console.log("get date done")
     setTimeout(function(){labTextMod() }, 400)
     //getDate()
   }
@@ -399,7 +412,7 @@ function expandLabName(){
      //console.log("finding empty")
      var children = sectionDivs[i].children
      if (children.length <=1){    	
-       sectionDivs[i].remove()    
+       //sectionDivs[i].remove()    
      }
    }
   
@@ -440,10 +453,10 @@ function getDate(){
 	//console.log(topDates)
   
 }
-
+//---------------
 //modifies the innerHTML of the lab values. Currently removes the Hour and bolds Lab Value
 function labTextMod(){ 
-  //console.log('modify lab text details')
+  //console.log('labTextMod started')
 
 
   var LabDateRawArr = $('div[id*=preventionProcedure]')
@@ -453,7 +466,7 @@ function labTextMod(){
     var labRange = LabDateRawArr[i].title.split('body=[')[1]
     labRange = labRange.split(']')[0]
     labRange = labRange.split(' ')[1]
-		console.log(RawText)
+		//console.log(RawText)
     //removal of times and bolding of values
     if (RawText.indexOf('</b>')>=0){
       //console.log('firstcol')
@@ -475,7 +488,7 @@ function labTextMod(){
       
   	}else{ // for the non-first column suff
       //---Splitting so get correct access to text area
-      console.log('not-firstcol')
+      //console.log('not-firstcol')
       var ReplaceText = RawText
       ReplaceText = ReplaceText.trim()
       ReplaceText = ReplaceText.substring(0,ReplaceText.lastIndexOf(' '))
@@ -516,7 +529,7 @@ function checkDoneLabTextMod(){
 
 //color the borders of the dates based on how old they are
 function colorDates(date,divVar){
-    console.log('color dates')
+   // console.log('color dates')
 
   var colorArr = [
     '2px solid #00ff00', 
@@ -552,12 +565,14 @@ function colorDates(date,divVar){
     }
       
   }
+  toggleTableVis()
   SortArea()
 }
 
 //----Sorts visible labs on page to newest on top. 
 function SortArea(){
-  console.log('sortingbyDate')
+  
+  //console.log('sortingbyDate')
   var marginObj
   
   var copyVisibleLabArr = new Array()
@@ -655,12 +670,16 @@ function arrayMatch(arrSection, arrFull) {
     return resultArr
  }
 
-
+//---------------
 //Pass the array of labs to show on the screen. 3 column array. In order you want it
+//Calls the native function that will request for the information to be displayed on screen
+//---------------
 function LoadMatchedArr(ArrayToLoad){
     //console.log(ArrayToLoad)
+    toggleTableVis()
   	for(var i=0; i<ArrayToLoad.length; i++){  
-      if (ArrayToLoad[i][2].match(/[a-z]/i)== null) { //Gets rid of non-labs. like PDF and Reports
+      if (ArrayToLoad[i][2].includes("-")== true) { //Gets rid of non-labs. like PDF and Reports
+        console.log(ArrayToLoad[i])
   			unsafeWindow.addLabToProfile2(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
       	//var LabElement = addLabToProfile3(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
 
@@ -722,7 +741,7 @@ function Cumulative() {
 function removeUnwanted() {
   		//console.log('remove unwanted')
   		var unwantedWords = ['physician', 'report', 'history', 'notification', 'consultation',
-                           'other','colonoscopy','pathology','surgical','operation', 'discharge']
+                           'other','colonoscopy','pathology','surgical','operation', 'discharge','date','referred']
       for (i = myLabArray.length -1  ; i >= 0 ; i--) {
 				var toDelete = 0
     		for (j = 0; j < unwantedWords.length; j++) {
@@ -824,6 +843,11 @@ function HepFunc() {
 	var MatchedArr = arrayMatch(HEPArray,LabIDArray)
   LoadMatchedArr(MatchedArr)
   setTimeout(function(){ waitLabLoad() }, 1000);
+  
+  
+  //unsafeWindow.addLabToProfile2('HL7','HIV 1+2 Ab + HIV p24 Ag (Screen)','XXX-2887');
+  //unsafeWindow.addLabToProfile2('HL7','HIV 1+2 Ab + HIV p24 Ag (Screen)','XXX-2887');
+  //unsafeWindow.addLabToProfile2('HL7','WBC','6690-2')
 }
 function AllFunc() {
   console.log('show all labs')
@@ -898,38 +922,36 @@ function CCBox() {
   }
 }
 
-function addLabToProfile3(labType,testName,identCode){
+function addLabToProfile23(labType,testName,identCode){
 	console.log('test')
+   ///alert("calling addLabToProfile2");
    var newNode = document.createElement('div');
    var img = document.createElement('img');
-   img.src = ('../images/osx-pinwheel.gif');
-   console.log('test1')
-  
-   newNode.appendChild(img);
-  
+   img.setAttribute('src','../images/osx-pinwheel.gif');
+   newNode.appendChild(img)
    var ran_number=Math.round(Math.random()*1000000);
    newNode.setAttribute('id','d'+ran_number);
-   console.log('test2')
-  //console.log(newNode)
-   //console.log($('cumulativeLab'))
-   $('#cumulativeLab')[0].appendChild(newNode);
+
    
-  
-  
-  
-   var url = "../lab/DisplayLabValue.jsp";
+   //$('cumulativeLab').appendChild(req.responseText);
+   var testing = $('#cumulativeLab')[0]
+   console.log(testing)
+   $('#cumulativeLab')[0].appendChild(newNode);
+   //alert(req.responseText);
+   console.log('tes2t')
+
+   var url = "total-life-care.kai-oscar.com/oscar/lab/DisplayLabValue.jsp";
    var ran_number=Math.round(Math.random()*1000000);
-   var params = "demographicNo=6586&rand="+ran_number+"&labType="+labType+"&testName="+testName+"&identCode="+identCode;  //hack to get around ie caching the page
+   var params = "demographicNo=71833&rand="+ran_number+"&labType="+labType+"&testName="+testName+"&identCode="+identCode;  //hack to get around ie caching the page
    ///alert(params);  //'d'+ran_number
-  console.log('test4')
+  console.log('tes32t')
    new Ajax.Updater(newNode,url, {method:'post',
                                           parameters:params,
                                           asynchronous:true,
                                            //onComplete: reRound
                                           evalScripts:true}); 
-  	console.log('test5')
-  
-  return newNode
-
+   ///alert("sdf"+$('d'+ran_number));
+   ///alert("sdf"+$('d'+ran_number));
+  console.log('tes24t')
 }
 
