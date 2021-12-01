@@ -96,7 +96,20 @@ document.addEventListener('keydown', function(theEvent) {
       
      	case theAltKey && theKey==='1': //Preventions or Save button
       	//---- Preventions tab
-      	$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+      	var checkHistoryPopUp= $('#showEditNote')[0].style.display
+        
+      	if (checkHistoryPopUp == "table"){
+          
+          var saveNoteBut = $('[type="image"][title*="Sign"][title*="Save"][src*="note-save"]')
+          console.log(saveNoteBut)
+          for (var i=0; i < saveNoteBut.length;i++){	
+            if(saveNoteBut[i].parentElement.parentElement.id.includes("Issue")==true){
+            	saveNoteBut[i].click()
+            }
+          }
+        }else{
+      		$('#preventions > div:nth-child(3) > h3:nth-child(1) > a:nth-child(1)').click()
+        }
       	//document.getElementById("saveImg").click()
       	break
       
