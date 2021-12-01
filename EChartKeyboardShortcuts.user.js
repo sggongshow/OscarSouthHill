@@ -101,7 +101,7 @@ document.addEventListener('keydown', function(theEvent) {
       	if (checkHistoryPopUp == "table"){
           
           var saveNoteBut = $('[type="image"][title*="Sign"][title*="Save"][src*="note-save"]')
-          console.log(saveNoteBut)
+          //console.log(saveNoteBut)
           for (var i=0; i < saveNoteBut.length;i++){	
             if(saveNoteBut[i].parentElement.parentElement.id.includes("Issue")==true){
             	saveNoteBut[i].click()
