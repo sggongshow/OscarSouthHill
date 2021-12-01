@@ -43,6 +43,15 @@ window.addEventListener('load', function() {
   BilledBut.setAttribute('style', 'width:60px;font-size:12px;z-index:1;position:fixed;top:50px;right:0px; background-color:cyan;');
   document.body.appendChild(BilledBut);
   
+  var ConfirmBut = document.createElement('input');
+  ConfirmBut.type = 'button';
+  ConfirmBut.id = 'ConfirmButton'
+  ConfirmBut.name = 'ConfirmButton'
+  ConfirmBut.value = 'Comfirm'
+  ConfirmBut.onclick = ConfirmButFunc
+  ConfirmBut.setAttribute('style', 'width:60px;font-size:12px;z-index:1;position:fixed;top:75px;right:0px; background-color:yellow;');
+  document.body.appendChild(ConfirmBut);
+  
 
 }, false);
 
@@ -82,7 +91,10 @@ function BilledButFunc(){
   var statusSelector = $('select[name="status"]')[0]
   statusSelector.value = findStatus("BILLED")
 }
-
+function ConfirmButFunc(){
+  var statusSelector = $('select[name="status"]')[0]
+  statusSelector.value = findStatus("Confirmed")
+}
 function findStatus(statusText){
   var value = ''
   var statusSelector = $('select[name="status"]')[0]
