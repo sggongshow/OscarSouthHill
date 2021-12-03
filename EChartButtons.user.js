@@ -460,7 +460,7 @@ function main(){
   var year = todayArr[3]
   var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
   
-  if (alreadyWriting.length < 50){
+  if (alreadyWriting.length < 20){
     console.log("Note is considered blank")
 	  newestNote.value = newDateString
   }
