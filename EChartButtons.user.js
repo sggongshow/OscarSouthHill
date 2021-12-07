@@ -310,7 +310,7 @@ function showAlert14()
   var res = myParam.indexOf('&')
   var demo_no = myParam.substring(0, res) //alert (demo_no)
   // INSERT YOU OWN form ID (fid=??) here
-  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1130&demographic_no=' + demo_no + '&appointment=' + ApptNum//var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
+  var formPath = vPath + '/eform/efmformadd_data.jsp?fid=1133&demographic_no=' + demo_no + '&appointment=' + ApptNum//var formPath = vPath + "/eform/efmformadd_data.jsp?fid=81&demographic_no=" + demo_no
   //alert(formPath)
   window.open(formPath, 'Popup_Window8', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=1000,height=800,left = 312,top = 234');
 }
