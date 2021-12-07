@@ -102,8 +102,8 @@ input4.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed
 document.body.appendChild(input4);
 function showAlert4() // INSERT YOU OWN MEASUREMENT groupName=?????  below
 {
-  $('#menu3 > a:nth-child(2)').click()
-  //window.open(vPath + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Vitals', 'VitalsWindow', 'width=1000,height=500')
+  //$('#menu3 > a:nth-child(2)').click()
+  window.open(vPath + '/oscarEncounter/oscarMeasurements/SetupMeasurements.do?groupName=Vitals', 'VitalsWindow', 'width=1000,height=500')
 }
 var input5 = document.createElement('input');
 input5.type = 'button';
@@ -460,7 +460,7 @@ function main(){
   var year = todayArr[3]
   var newDateString = '[' + day + '-' + month + '-' + year + ' :' + noteExtra
   
-  if (alreadyWriting.length < 20){
+  if (alreadyWriting.length < 50){
     console.log("Note is considered blank")
 	  newestNote.value = newDateString
   }
