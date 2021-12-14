@@ -19,17 +19,10 @@ function main(){
 }
 
 function main2(checkCort){
-  console.log("test2")
-  console.log(checkCort)
   var boxCort = checkCort[0].parentElement
-  var boxCortClass = boxCort.className
 	console.log(boxCort)
-  console.log(boxCortClass)
-  var boxCortArr = boxCortClass.split('tw-right')
-  var newClass = boxCortArr[0] + 'tw-left' + boxCortArr[1]
-  console.log(newClass)
-  boxCort.setAttribute('class',newClass)
-  //console.log(boxCort)
+  boxCort["style"]= "z-index:1;position:fixed;bottom:60px;left:20px;"
+
 }
 
 
