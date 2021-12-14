@@ -19,11 +19,17 @@ function main(){
 }
 
 function main2(checkCort){
+
   var boxCort = checkCort[0].parentElement
-	console.log(boxCort)
+  var boxCortClass = boxCort.className
+  var boxCortArr = boxCortClass.split('tw-right')
+  var newClass = boxCortArr[0] + 'tw-left' + boxCortArr[1]
+  boxCort.setAttribute('class',newClass)
   boxCort["style"]= "z-index:1;position:fixed;bottom:60px;left:20px;"
 
 }
+
+
 
 
 window.addEventListener('load', function() {
