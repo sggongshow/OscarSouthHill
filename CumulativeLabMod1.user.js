@@ -7,6 +7,9 @@
 // @version     0.1
 // ==/UserScript==
 //========Get Path============
+
+// UPDATED DEC 16 2021
+
 //var formID='384' //  ENTER YOUR SPECIFIC POPUPWINDOW FORM ID NUMBER HERE
 
 //===============================
@@ -319,18 +322,16 @@ setTimeout(function(){radioBtn5.click() }, 300)
 
 
 //console.log(myLabArray)
-//-------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 //-----Test area-------------------------------------------------------------
 
 
 
 
 
-
-
-//-------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 //FUNCTIONS
-//-------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------
 function EraseArea(){
   DisplayArea.innerHTML=''
 }
@@ -460,7 +461,7 @@ function labTextMod(){
 
 
   var LabDateRawArr = $('div[id*=preventionProcedure]')
-  console.log(LabDateRawArr.length)
+  //console.log(LabDateRawArr.length)
   for (var i=0; i< LabDateRawArr.length; i++){ //LabDateRawArr.length
   	var RawText = LabDateRawArr[i].innerHTML
     var labRange = LabDateRawArr[i].title.split('body=[')[1]
@@ -565,7 +566,7 @@ function colorDates(date,divVar){
     }
       
   }
-  toggleTableVis()
+  
   SortArea()
 }
 
@@ -623,7 +624,78 @@ function SortArea(){
     j--
     
   }
+  
+  checkRange()
+  toggleTableVis()
 }
+
+function checkRange(){
+	var LabDateRawArr = $('div[id*=preventionProcedure]')
+  
+  
+	console.log(LabDateRawArr)
+  for (var i=0; i<LabDateRawArr.length; i++){
+    var min = 9999
+    var max = -1
+    var value = -9
+    var div = LabDateRawArr[i]
+    var raw = LabDateRawArr[i].innerText
+    var valueStr = raw.split('(')[0].trim()
+    var reference = raw.split("(")[1].split(")")[0]
+    
+    if (valueStr.includes("-")){
+      console.log(valueStr)  
+      valueStr = "NaN"    	
+    }
+    var value = parseFloat(valueStr)
+
+
+    let inBound = true
+
+    if (raw.includes("()")){    ///what to do if no reference range
+      //do nothing if empty aka remain true and no changes to background color     
+    }else if (reference.includes(">")){// what to do if there is a bottom only limiter
+      var min = raw.split("(")[1].split(")")[0]
+      min = min.replace(/[^\w.]+/g, '')
+      min = parseFloat(min)
+      if (value<min){
+        inBound = false
+      }
+    }else if (reference.includes("<")){//what to do if there is a top only limiter
+      var max = raw.split("(")[1].split(")")[0]
+      max = max.replace(/[^\w.]+/g, '')
+      max = parseFloat(max)
+      if (value>max || value<0){
+        inBound = false
+      }
+    }else if (reference.includes("-")){// what to do if there is a range limit
+      var minMax = raw.split("(")[1].split(")")[0] 
+      min = parseFloat(minMax.split("-")[0])
+      max = parseFloat(minMax.split("-")[1])   
+      if(value<min || value > max){
+        inBound = false 
+      }
+    }else{
+      console.log("value: " + valueStr)
+    	console.log(reference)
+      if (valueStr != reference){
+        inBound = false 
+      }
+    }
+
+    //console.log(inBound)
+    if (inBound === false){//SUPPOSED TO BE FALSE
+      //console.log("running background mod")
+      //console.log(div.children)
+      var background = div.querySelector(['p'])
+      //console.log(div)
+      background.style.backgroundColor = "lightpink"
+    }
+
+    //end loop
+  }
+  
+}//end Check range
 
 
 //--------------------------------------------------------
@@ -679,7 +751,7 @@ function LoadMatchedArr(ArrayToLoad){
     toggleTableVis()
   	for(var i=0; i<ArrayToLoad.length; i++){  
       if (ArrayToLoad[i][2].includes("-")== true) { //Gets rid of non-labs. like PDF and Reports
-        console.log(ArrayToLoad[i])
+        //console.log(ArrayToLoad[i])
   			unsafeWindow.addLabToProfile2(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
       	//var LabElement = addLabToProfile3(ArrayToLoad[i][1],ArrayToLoad[i][0],ArrayToLoad[i][2])
 
@@ -837,17 +909,15 @@ function InfFunc() {
   setTimeout(function(){ waitLabLoad() }, 1000);
 }
 function HepFunc() {
-  EraseArea()
+  /*EraseArea()
   console.log("HepFunc")
   var LabIDArray = getCol(myLabArray,2)
 	var MatchedArr = arrayMatch(HEPArray,LabIDArray)
   LoadMatchedArr(MatchedArr)
   setTimeout(function(){ waitLabLoad() }, 1000);
-  
-  
-  //unsafeWindow.addLabToProfile2('HL7','HIV 1+2 Ab + HIV p24 Ag (Screen)','XXX-2887');
-  //unsafeWindow.addLabToProfile2('HL7','HIV 1+2 Ab + HIV p24 Ag (Screen)','XXX-2887');
-  //unsafeWindow.addLabToProfile2('HL7','WBC','6690-2')
+  */
+  //checkRange()
+
 }
 function AllFunc() {
   console.log('show all labs')
