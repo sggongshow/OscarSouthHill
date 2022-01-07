@@ -342,7 +342,17 @@ function topDatesReset(){
   new Date('1990-02-01'),
   new Date('1990-03-01'),
   new Date('1990-04-01'),
-  new Date('1990-05-01')
+  new Date('1990-05-01'),
+  new Date('1990-06-01'),
+  new Date('1990-07-02'),
+  new Date('1990-07-03'),
+  new Date('1990-07-04'),
+  new Date('1990-07-05'),
+  new Date('1990-07-06'),
+  new Date('1990-07-07'),
+  new Date('1990-07-08'),
+  new Date('1990-07-09'),
+  new Date('1990-07-20')
   ] 
 }
 
@@ -456,6 +466,7 @@ function getDate(){
 }
 //---------------
 //modifies the innerHTML of the lab values. Currently removes the Hour and bolds Lab Value
+//Changes add the reference lab range onto to html
 function labTextMod(){ 
   //console.log('labTextMod started')
 
@@ -466,7 +477,10 @@ function labTextMod(){
   	var RawText = LabDateRawArr[i].innerHTML
     var labRange = LabDateRawArr[i].title.split('body=[')[1]
     labRange = labRange.split(']')[0]
-    labRange = labRange.split(' ')[1]
+    labRange = labRange.substring(labRange.indexOf(' '))
+
+    labRange = labRange.replace(/\s/g, ''); //Extra spaces in the reference range string causes issues
+    
 		//console.log(RawText)
     //removal of times and bolding of values
     if (RawText.indexOf('</b>')>=0){
@@ -570,7 +584,7 @@ function colorDates(date,divVar){
   SortArea()
 }
 
-//----Sorts visible labs on page to newest on top. 
+//----Sorts visible labs on page to newest on top. The number of dates that it sorts is number of rows of TopValue
 function SortArea(){
   
   //console.log('sortingbyDate')
@@ -611,10 +625,13 @@ function SortArea(){
         
       
     }
+    //makes a gap after the last colored box
+    if (j==5){
+    	marginObj.style.marginBottom = '50px'
+    }
   }
-  //makes a gap after the last colored box
-  marginObj.style.marginBottom = '30px'
   
+  //print out everything that is left over
   //console.log(copyVisibleLabArr)
   for (var j=0; j<copyVisibleLabArr.length; j++){
     var objDiv = copyVisibleLabArr[j][0]
@@ -628,7 +645,7 @@ function SortArea(){
   checkRange()
   toggleTableVis()
 }
-
+///Check if the result is within range and color it pink if it is out of range
 function checkRange(){
 	var LabDateRawArr = $('div[id*=preventionProcedure]')
   
@@ -642,6 +659,7 @@ function checkRange(){
     var raw = LabDateRawArr[i].innerText
     var valueStr = raw.split('(')[0].trim()
     var reference = raw.split("(")[1].split(")")[0]
+    //reference = reference.replace(/\s/g, '');
     
     if (valueStr.includes("-")){
       console.log(valueStr)  
