@@ -8,9 +8,7 @@
 // ==/UserScript==
 //========Get Path============
 
-// UPDATED DEC 22 2021
-
-//var formID='384' //  ENTER YOUR SPECIFIC POPUPWINDOW FORM ID NUMBER HERE
+// UPDATED Jan 17 2022
 
 //===============================
 //var mylink = 'eform/efmshowform_data.jsp?fid='+formID
@@ -75,7 +73,7 @@ input2.type = 'button';
 input2.value = 'Sort';
 input2.onclick = showAlert2;
 input2.setAttribute('style', 'font-size:16px;position:absolute;top:0px;left:30px;');
-document.body.appendChild(input2);
+//document.body.appendChild(input2);
 function showAlert2() {
   myDisplay()
 }
@@ -198,13 +196,7 @@ var checkedValues = ''
 var LabDataPrint = ''
 var myLabArray = []
 
-var topDates = [
-  new Date('1990-01-01'), 
-  new Date('1990-02-01'),
-  new Date('1990-03-01'),
-  new Date('1990-04-01'),
-  new Date('1990-05-01')
-  ]
+var topDates = []
 
 var labDatesArr = []
 
@@ -307,7 +299,7 @@ updateBtn.setAttribute('style', 'font-size:12px;position:absolute;top:10px;right
 
 //------Extend horizontally so now lab value wrapping
 var labDivContainer = $('#cumulativeLab')[0]
-labDivContainer.style.minWidth = '3000px'
+labDivContainer.style.minWidth = '5000px'
 
 
 if (params.mysort) {
@@ -661,14 +653,22 @@ function checkRange(){
     var reference = raw.split("(")[1].split(")")[0]
     //reference = reference.replace(/\s/g, '');
     
+    let inBound = true
+  
+    
     if (valueStr.includes("-")){
       console.log(valueStr)  
       valueStr = "NaN"    	
     }
-    var value = parseFloat(valueStr)
+    /*if (valueStr.indexOf(">")>=0){//If result contain ">" it usually means something is bad
+      inBound = false
+    }*/
+      
+   	var value = parseFloat(valueStr)
 
 
-    let inBound = true
+   
+    
 
     if (raw.includes("()")){    ///what to do if no reference range
       //do nothing if empty aka remain true and no changes to background color     
@@ -676,14 +676,14 @@ function checkRange(){
       var min = raw.split("(")[1].split(")")[0]
       min = min.replace(/[^\w.]+/g, '')
       min = parseFloat(min)
-      if (value<min){
+      if (value<=min){
         inBound = false
       }
     }else if (reference.includes("<")){//what to do if there is a top only limiter
       var max = raw.split("(")[1].split(")")[0]
       max = max.replace(/[^\w.]+/g, '')
       max = parseFloat(max)
-      if (value>max || value<0){
+      if (value>=max || value<0){
         inBound = false
       }
     }else if (reference.includes("-")){// what to do if there is a range limit
