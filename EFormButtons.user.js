@@ -7,12 +7,16 @@
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @version 15.2
 // ==/UserScript==
-//window.moveTo(300, 100)
+
+unsafeWindow.onbeforeunload = null;
+unsafeWindow.onunload = null;
+
 
 window.addEventListener('load', function() {
   var textBox = $('textarea[name="textarea"]')
   textBox.select()  
 }, false);
+
 
 
 document.addEventListener('keydown', function(theEvent) {
@@ -39,17 +43,18 @@ document.addEventListener('keydown', function(theEvent) {
 
 var input = document.createElement('input');
 input.type = 'button';
-input.value = 'Submit.';
+input.value = 'Submit';
 input.onclick = showAlert
 input.setAttribute('style', 'width:80px;font-size:16px;z-index:1;position:fixed;top:0px;left:0px; background-color:#66ff66;');
 input.classList.add('DoNotPrint')
 document.body.appendChild(input);
 function showAlert()
 {
+  console.log("SUBHIT")
 	var subButton = $('input[type="submit"][value="Submit"]')
   //console.log(subButton)
   if (subButton.length <1){
-    subButton = $('#SubmitButton')
+    subButton = $('#SubmitButton')[0]
     //console.log("note1")
     console.log(subButton)
   }
@@ -60,6 +65,7 @@ function showAlert()
   }
      
   //console.log(subButton)
+  //subButton.focus()
   subButton.click()
   //unsafeWindow.submission()
 } 
