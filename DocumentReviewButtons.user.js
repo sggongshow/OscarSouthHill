@@ -6,7 +6,9 @@
 // @include     */dms/MultiPageDocDisplay.jsp?*
 // @include     *lab/CA/ALL/labDisplay.jsp?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
-// @version 15.2
+// @updateURL https://github.com/sggongshow/Oscar/raw/main/DocumentReviewButtons.user.js
+// @downloadURL https://github.com/sggongshow/Oscar/raw/main/DocumentReviewButtons.user.js
+// @version 22.02.28.5
 // ==/UserScript==
 //window.moveTo(300, 100)
 
