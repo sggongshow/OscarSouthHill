@@ -6,7 +6,7 @@
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @updateURL https://github.com/sggongshow/OscarSouthHill/raw/main/EChartButtons.user.js
 // @downloadURL https://github.com/sggongshow/OscarSouthHill/raw/main/EChartButtons.user.js
-// @version 21.02.28.5
+// @version 22.02.28.5
 // @grant       none
 // ==/UserScript==
 //window.moveTo(300, 100)
