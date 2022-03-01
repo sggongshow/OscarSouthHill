@@ -4,7 +4,9 @@
 // @description Constant EForm Submit and Print button locations
 // @include     *appointmentcontrol.jsp*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
-// @version 15.2
+// @updateURL https://github.com/sggongshow/OscarSouthHill/raw/main/EditApptButtons.user.js
+// @downloadURL https://github.com/sggongshow/OscarSouthHill/raw/main/EditApptButtons.user.js
+// @version 21.02.28.5
 // ==/UserScript==
 
 
@@ -47,7 +49,7 @@ window.addEventListener('load', function() {
   ConfirmBut.type = 'button';
   ConfirmBut.id = 'ConfirmButton'
   ConfirmBut.name = 'ConfirmButton'
-  ConfirmBut.value = 'Comfirm'
+  ConfirmBut.value = 'TODO'
   ConfirmBut.onclick = ConfirmButFunc
   ConfirmBut.setAttribute('style', 'width:60px;font-size:12px;z-index:1;position:fixed;top:75px;right:0px; background-color:yellow;');
   document.body.appendChild(ConfirmBut);
@@ -81,19 +83,19 @@ document.addEventListener('keydown', function(theEvent) {
 
 function DoneButFunc(){
   var statusSelector = $('select[name="status"]')[0]
-  statusSelector.value = findStatus("DONE")
+  statusSelector.value = findStatus("Chart Completed")
 }
 function NoShowButFunc(){
   var statusSelector = $('select[name="status"]')[0]
-  statusSelector.value = findStatus("NO SHOW")
+  statusSelector.value = findStatus("No Show")
 }
 function BilledButFunc(){
   var statusSelector = $('select[name="status"]')[0]
-  statusSelector.value = findStatus("BILLED")
+  statusSelector.value = findStatus("Billed")
 }
 function ConfirmButFunc(){
   var statusSelector = $('select[name="status"]')[0]
-  statusSelector.value = findStatus("Confirmed")
+  statusSelector.value = findStatus("To Do - Follow Up")
 }
 function findStatus(statusText){
   var value = ''
