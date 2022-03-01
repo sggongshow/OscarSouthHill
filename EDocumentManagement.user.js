@@ -4,7 +4,9 @@
 // @description Constant EForm Submit and Print button locations
 // @include     *oscar/dms/documentReport.jsp*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
-// @version 15.2
+// @updateURL https://github.com/sggongshow/OscarSouthHill/raw/main/EDocumentManagement.user.js
+// @downloadURL https://github.com/sggongshow/OscarSouthHill/raw/main/EDocumentManagement.user.js
+// @version 21.02.28.5
 // ==/UserScript==
 
 var myWindow = ''
@@ -72,7 +74,7 @@ input3.setAttribute('style', 'width:60px;height:20px;font-size:14px;z-index:1;po
 document.body.appendChild(input3);
 function showAlert3()
 {
-  window.location = (newURL + "Imaging report");
+  window.location = (newURL + "radiology");
 }
 
 
@@ -81,7 +83,7 @@ input4.type = 'button';
 input4.value = 'Legal';
 input4.onclick = showAlert4;
 input4.setAttribute('style', 'width:60px;height:20px;font-size:14px;z-index:1;position:fixed;top:0px;left:640px; background-color:#66ff66;');
-document.body.appendChild(input4);
+//document.body.appendChild(input4);
 function showAlert4()
 {
   window.location = (newURL + "legal");
