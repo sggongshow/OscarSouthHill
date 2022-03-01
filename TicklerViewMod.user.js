@@ -4,8 +4,8 @@
 // @description Constant EForm Submit and Print button locations
 // @include     */ticklerDemoMain.jsp?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
-// @updateURL https://github.com/sggongshow/OscarsSouthHill/raw/main/TicklerViewMod.user.js
-// @downloadURL https://github.com/sggongshow/OscarsSouthHill/raw/main/TicklerViewMod.user.js
+// @updateURL https://github.com/sggongshow/Oscars/raw/main/TicklerViewMod.user.js
+// @downloadURL https://github.com/sggongshow/Oscars/raw/main/TicklerViewMod.user.js
 // @version 22.02.28.5
 // ==/UserScript==
 
