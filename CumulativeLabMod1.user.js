@@ -3,12 +3,14 @@
 // @namespace   GongOscar
 // @include     *lab/CumulativeLabValues.jsp*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
+// @updateURL https://github.com/sggongshow/Oscars/raw/main/CumulativeLabMod1.user.js
+// @downloadURL https://github.com/sggongshow/Oscars/raw/main/CumulativeLabMod1.user.js
+// @version 22.02.28.5
 // @grant       none
-// @version     0.1
 // ==/UserScript==
 //========Get Path============
 
-// UPDATED Jan 17 2022
+// NOTE TO SELF: MAIN GITHUB FOLDER MODIFICATIONS. NO REFERENCE TO SUBFOLDERS OR BRANCES
 
 //===============================
 //var mylink = 'eform/efmshowform_data.jsp?fid='+formID
