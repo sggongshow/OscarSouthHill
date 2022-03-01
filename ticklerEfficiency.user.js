@@ -5,13 +5,15 @@
 // @include     */ticklerAdd.jsp?*
 // @include     *ForwardDemographicTickler.do?*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
-// @version 15.2
+// @updateURL https://github.com/sggongshow/OscarSouthHill/raw/main/ticklerEfficiency.user.js
+// @downloadURL https://github.com/sggongshow/OscarSouthHill/raw/main/ticklerEfficiency.user.js
+// @version 21.02.28.5
 // ==/UserScript==
 
 
 //wait window load first
 
-var myIDNum = '37250'
+var myIDNum = '227'
 
 window.addEventListener('load', function() {
   
@@ -33,10 +35,14 @@ window.addEventListener('load', function() {
   HiBut.setAttribute('style', 'width:80px;font-size:12px;padding:0px;position:fixed;top:80px;right:10; border-color:red;');
 	document.body.appendChild(HiBut);
   
+  //default to TCI
+  TCIButtonFunc()
   
   //--------- select the textbox area so I can start typing immediately
   var textBox = $('textarea[name="textarea"]')
   textBox.select()  
+  
+ 
 }, false);
 
 
@@ -55,6 +61,7 @@ document.addEventListener('keydown', function(theEvent) {
 			break;
       
     case theAltKey && theKey==='w': 
+      //console.log('test')
       meButtonFunc()
 			break;
       
@@ -78,5 +85,13 @@ function HiButtonFunc(){
   //var priorityAssign = $('select[name=priority]')[0]
   //priorityAssign.value = 'High'
   var taskAssign = $('select[name=task_assigned_to]')[0]
-  taskAssign.value = 40
+  taskAssign.value = 49
+}
+function TCIButtonFunc(){
+  var taskAssign = $('select[name=task_assigned_to]')[0]
+  taskAssign.value = 126
+}
+function ImagingBookingButtonFunc(){
+  var taskAssign = $('select[name=task_assigned_to]')[0]
+  taskAssign.value = 203
 }
