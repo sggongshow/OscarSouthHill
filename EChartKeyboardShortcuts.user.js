@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name           EChart_KeyboardShortcuts
 // @namespace      Gong Oscar
-// @version 15.2
 // @description Various Echart shortcut buttons (Alt+ e,v,z,x,k,s,0,1,2,3,4,5,7). Set your own Measurement groupName and default population text.
 // @include        */casemgmt/forward.jsp?action=view&demographic*
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
+// @updateURL https://github.com/sggongshow/Oscars/raw/main/EChartKeyboardShortcuts.user.js
+// @downloadURL https://github.com/sggongshow/Oscars/raw/main/EChartKeyboardShortcuts.user.js
+// @version 22.02.28.5
 // ==/UserScript==
 
 function setCookie(cname, cvalue, exdays, cpath)
