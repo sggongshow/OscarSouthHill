@@ -6,7 +6,7 @@
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @updateURL https://github.com/sggongshow/Oscars/raw/main/EChartKeyboardShortcuts.user.js
 // @downloadURL https://github.com/sggongshow/Oscars/raw/main/EChartKeyboardShortcuts.user.js
-// @version 22.02.28.5
+// @version 22.03.02.0
 // ==/UserScript==
 
 function setCookie(cname, cvalue, exdays, cpath)
@@ -58,8 +58,10 @@ document.addEventListener('keydown', function(theEvent) {
 			break;
       
     case theAltKey && theKey==='s': //save, sign and bill
- 			$('#save > span > input:nth-child(6)').click()
-			break;
+ 			//$('#save > span > input:nth-child(6)').click()
+			var signsave = $('[title="Sign Save & Bill"]')[0]
+      			//console.log(signsave)
+     			signsave.click()
       
 		
     case theAltKey && theKey==='t': //new Tickler
