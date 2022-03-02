@@ -78,7 +78,7 @@ document.addEventListener('keydown', function(theEvent) {
 			break;
       
     case theAltKey && theKey==='f': //Medical Hx
- 			$('a[href="#"][onclick*="showIssueHistory"][onclick*="66')"]')[0].click()
+ 			$('a[href="#"][onclick*="showIssueHistory"][onclick*="66"]')[0].click()
 			break;
        
       /*
