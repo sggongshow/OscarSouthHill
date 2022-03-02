@@ -6,7 +6,7 @@
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @updateURL https://github.com/sggongshow/Oscars/raw/main/EChartKeyboardShortcuts.user.js
 // @downloadURL https://github.com/sggongshow/Oscars/raw/main/EChartKeyboardShortcuts.user.js
-// @version 22.03.02.0
+// @version 22.03.02.1
 // ==/UserScript==
 
 function setCookie(cname, cvalue, exdays, cpath)
