@@ -11,7 +11,7 @@
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @updateURL https://github.com/sggongshow/OscarSouthHill/raw/main/BillingCodeToText.user.js
 // @downloadURL https://github.com/sggongshow/OscarSouthHill/raw/main/BillingCodeToText.user.js
-// @version 22.03.02.6
+// @version 22.03.02.7
 // ==/UserScript==
 
 var MutationObserver = window.MutationObserver;
