@@ -40,27 +40,25 @@ window.addEventListener('load', function() {
 
 //--- some magical stuff to detect if changes to re-run main - SOMEHOW WORKS. NOT SURE WHY WORKING. 
 function mutationHandler (mutationRecords) {
-  console.log("running mutation handler")
-  console.log(mutationRecords)
+  //console.log("running mutation handler")
   MutationNewElement = $('[class="table table-condensed table-bordered serviceCodesTable"]')[0].querySelector(['[type = "checkbox"]'])
   MutationNewData = MutationNewElement.value
-  console.log("newval:" + MutationNewData)
+  //console.log("newval:" + MutationNewData)
   
   if (MutationNewData != MutationOldData){
-    console.log("FORM CHANGED DETECTED AND PAGE CHANGE DETECTED: TO RERUN MODS")  
+    //console.log("FORM CHANGED DETECTED AND PAGE CHANGE DETECTED: TO RERUN MODS")  
     setTimeout(function(){ main(); }, 250);
-    //main()
     mutationObserver.disconnect()
 
   }
 }
 
 function main(){
-  console.log("running main")
+  //console.log("running main")
   //---- Record previous value
   MutationOldElement = $('[class="table table-condensed table-bordered serviceCodesTable"]')[0].querySelector(['[type = "checkbox"]'])
   MutationOldData = MutationOldElement.value
-  console.log("oldval:" + MutationOldData)
+  //console.log("oldval:" + MutationOldData)
   
   ///change the names of recently used to text instead of ICD9
   var codeList = $('#DX_REFERENCE')[0].querySelector('.form-control')
