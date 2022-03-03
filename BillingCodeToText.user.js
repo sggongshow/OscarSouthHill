@@ -11,20 +11,18 @@
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @updateURL https://github.com/sggongshow/OscarSouthHill/raw/main/BillingCodeToText.user.js
 // @downloadURL https://github.com/sggongshow/OscarSouthHill/raw/main/BillingCodeToText.user.js
-// @version 22.03.02.5
+// @version 22.03.02.6
 // ==/UserScript==
 
 var MutationObserver = window.MutationObserver;
 var myObserver       = new MutationObserver (mutationHandler);
 var obsConfig        = {
   childList: true, 
-    subtree: true
 };
 var MutationOldData
 var MutationNewData
 var MutationOldElement
 var MutationNewElement
-
 
 //wait window load first
 
@@ -43,19 +41,22 @@ window.addEventListener('load', function() {
 //--- some magical stuff to detect if changes to re-run main - SOMEHOW WORKS. NOT SURE WHY WORKING. 
 function mutationHandler (mutationRecords) {
   console.log("running mutation handler")
+  console.log(mutationRecords)
   MutationNewElement = $('[class="table table-condensed table-bordered serviceCodesTable"]')[0].querySelector(['[type = "checkbox"]'])
   MutationNewData = MutationNewElement.value
   console.log("newval:" + MutationNewData)
   
   if (MutationNewData != MutationOldData){
-    console.log("FORM CHANGED DETECTED AND PAGE CHANGE DETECTED: TO RERUN MODS")
+    console.log("FORM CHANGED DETECTED AND PAGE CHANGE DETECTED: TO RERUN MODS")  
     setTimeout(function(){ main(); }, 250);
+    //main()
     mutationObserver.disconnect()
+
   }
 }
 
 function main(){
-  //console.log("running main")
+  console.log("running main")
   //---- Record previous value
   MutationOldElement = $('[class="table table-condensed table-bordered serviceCodesTable"]')[0].querySelector(['[type = "checkbox"]'])
   MutationOldData = MutationOldElement.value
@@ -93,7 +94,7 @@ function main(){
   ICDBox.insertBefore(headingTr.children[1],null)
   
   
-  
+
   // $("tbody tr:nth-child(11)").insertAfter("tbody tr:nth-child(4)");
 
 }
